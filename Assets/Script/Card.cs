@@ -21,16 +21,24 @@ public class Card : MonoBehaviour
     private bool isFlipping = false;
     //시작 카드 뒤집기 체크
     private bool startFlipCheck = false;
+    //카드 매치 확인
+    private bool isMatched = false;
 
     public int cardID;
     //public int findCardID;
 
+
+
     public void SetCardID(int id)
-    {
-        cardID = id;
-        //Debug.Log("cardID: " + cardID);
+    { 
+        cardID = id; 
     }
 
+    public void SetMatched() 
+    { 
+        isMatched = true;
+    }
+    
     //카드 이미지 변경
     public void SetFrontSprite(Sprite sprite)
     {
@@ -125,11 +133,11 @@ public class Card : MonoBehaviour
     //카드 클릭
     private void OnMouseDown()
     {
-        if (!isFlipping)
+        if (!isFlipping  && !isMatched)
         {
             //FlipCard();
-            GameManager.Instance.CardClicked(this);
             Debug.Log("카드 뒤집는다");
+            GameManager.Instance.CardClicked(this);
         }
     }
 }

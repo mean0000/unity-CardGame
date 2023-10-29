@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,17 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Sprite[] findCardSprite;
 
+
+    [SerializeField]
+    private GameObject card_Matching_Success00;
+    [SerializeField]
+    private GameObject card_Matching_Success01;
+    [SerializeField]
+    private GameObject card_Matching_Mistake00;
+    [SerializeField]
+    private GameObject card_Matching_Mistake01;
+
+
     private GameObject cardObject;
     private GameObject FindCardObject;
 
@@ -34,6 +46,7 @@ public class Board : MonoBehaviour
     void Start()
     {
         levelManager = FindObjectOfType<LevelManager>();
+        Debug.Log("확인");
 
         GenerateCardID();
 
@@ -53,21 +66,24 @@ public class Board : MonoBehaviour
 
     public void Restart()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+        //levelManager = FindObjectOfType<LevelManager>();
 
-        GenerateCardID();
+        //GenerateCardID();
 
-        ShuffleCardID();
-        ShuffleFindCardID();
-        try
-        {
-            InitBoard();
-        }
-        catch
-        {
-            Debug.Log("아직 게임 시작 화면이 아님");
-        };
-            InitFindBoard();
+        //ShuffleCardID();
+        //ShuffleFindCardID();
+        //try
+        //{
+        //    InitBoard();
+        //}
+        //catch
+        //{
+        //    Debug.Log("아직 게임 시작 화면이 아님");
+        //};
+        //    InitFindBoard();
+
+        gameObject.GetComponent<Board>().enabled = false;
+        gameObject.GetComponent<Board>().enabled = true;
     }
 
     //카드 생성
@@ -204,6 +220,67 @@ public class Board : MonoBehaviour
     public List<FindCard> GetFindCardList()
     {
         return findCardList;
+    }
+
+
+
+
+    //카드 매칭 성공 실패 팝업
+    public void CardMatchingResultPopup(bool check)
+    {
+        int randomIndex = UnityEngine.Random.Range(0, 2);
+        Vector3 originalScale = transform.localScale;
+        Debug.Log("Random00: " + randomIndex);
+        Debug.Log("check" + check);
+        if (check)
+        {
+
+            Debug.Log("dkdkdkdkdkd");
+            if (randomIndex == 0)
+            {
+                Debug.Log("Random00" + randomIndex);
+                card_Matching_Success00.SetActive(true);
+                //팝업제거
+                transform.DOScale(originalScale, 1f).OnComplete(() =>
+                {
+                    card_Matching_Success00.SetActive(false);
+                });
+            }
+            else
+            {
+                Debug.Log("Random01" + randomIndex);
+                card_Matching_Success01.SetActive(true);
+                //팝업제거
+                transform.DOScale(originalScale, 1f).OnComplete(() =>
+                {
+                    card_Matching_Success01.SetActive(false);
+                });
+            }
+
+        }
+        else
+        {
+            if (randomIndex == 0)
+            {
+                Debug.Log("Random00" + randomIndex);
+                card_Matching_Mistake00.SetActive(true);
+                transform.DOScale(originalScale, 1f).OnComplete(() =>
+                {
+                    card_Matching_Mistake00.SetActive(false);
+                });
+            }
+            else
+            {
+                Debug.Log("Random01" + randomIndex);
+                card_Matching_Mistake01.SetActive(true);
+                transform.DOScale(originalScale, 1f).OnComplete(() =>
+                {
+                    card_Matching_Mistake01.SetActive(false);
+                });
+            }
+
+        }
+
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Timer : MonoBehaviour
+public class UI_Timer : MonoBehaviour
 {
     [SerializeField]
     Text timerText;
@@ -22,6 +22,12 @@ public class Timer : MonoBehaviour
         if (timerActive)
         {
             second += Time.deltaTime;
+            if(second >= 60f)
+            {
+                min += 1;
+                second = 0;
+            }
+
             timerText.text = string.Format("{0:D2}  {1:D2}", min, (int)second);
         }
     }

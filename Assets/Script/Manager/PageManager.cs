@@ -34,4 +34,9 @@ public class PageManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ButtoEvent_GameQuit()
+    {
+        Application.Quit();
+    }
 }
