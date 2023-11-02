@@ -6,8 +6,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private Board board;
-    private LevelManager levelManager;
     private Card flippedCard;
     private FindCard waitingCard;
     
@@ -26,9 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        board = FindObjectOfType<Board>();
-        levelManager = FindObjectOfType<LevelManager>();
-        allCards = board.GetCards();
+        allCards = Board.instance.GetCards();
 
         StartCoroutine("FlipAllCardRoutine");
     }
@@ -43,11 +39,12 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void FlipAllCard()
+    public void FlipAllCard()
     {
         foreach(Card card in allCards) 
         {
-            card.StartFlipCard();   
+            Debug.Log("여기가 시작 뒤집기");
+            card.StartFlipCard();
         }
     }
 
@@ -63,7 +60,7 @@ public class GameManager : MonoBehaviour
 
         card.FlipCard();
         flippedCard = card;
-        allfindCardList = board.GetFindCardList();
+        allfindCardList = Board.instance.GetFindCardList();
         waitingCard = allfindCardList[0];
 
         //FlippedCard = 클릭할 카드, watingCard = 찾아야할 카드
@@ -82,22 +79,30 @@ public class GameManager : MonoBehaviour
 
         isFlipping = true;
 
+
+
+        if (Board.instance.resetCheck)
+        {
+            card.CardReStart();
+        }
+
+
         if (card.cardID == findcard.findCardID)
         {
             card.SetMatched();
             Debug.Log("Same Card");
             //찾은 개수 증가
-            levelManager.findCount++;
+            LevelManager.Instance.findCount++;
 
             //카드 삭제
-            board.SameCardDestory();
+            Board.instance.SameCardDestory();
             Debug.Log("카드 제거");
 
             //카드 맞추기 성공
             yield return new WaitForSeconds(0.25f);
             Debug.Log("팝업 등장");
             card_Matching_Result = true;
-            board.CardMatchingResultPopup(card_Matching_Result);
+            Board.instance.CardMatchingResultPopup(card_Matching_Result);
             yield return new WaitForSeconds(0.8f);
         }
         else
@@ -107,7 +112,7 @@ public class GameManager : MonoBehaviour
             //카드 맞추기 실패
             yield return new WaitForSeconds(0.3f);
             card_Matching_Result = false;
-            board.CardMatchingResultPopup(card_Matching_Result);
+            Board.instance.CardMatchingResultPopup(card_Matching_Result);
 
             yield return new WaitForSeconds(1f);
             card.FlipCard();
@@ -119,8 +124,9 @@ public class GameManager : MonoBehaviour
         isFlipping = false;
         flippedCard = null;
 
+
         //게임 상황 체크
-        levelManager.GamePlayingCheck();
+        LevelManager.Instance.GamePlayingCheck();
     }
 
 

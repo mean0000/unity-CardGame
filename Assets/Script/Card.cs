@@ -66,12 +66,15 @@ public class Card : MonoBehaviour
             //시작 화면 첫 뒤집기 이미지 변경
             if (startFlipCheck)
             {
+                
                 if (isFlipped)
                 {
+                    
                     cardRenderer.sprite = frontSprite;
                 }
                 else
                 {
+                    
                     cardRenderer.sprite = backSprite;
                 }
                 startFlipCheck = false;
@@ -82,14 +85,16 @@ public class Card : MonoBehaviour
                 });
                 return;
             }
-
+            Debug.Log("스타트");
             //그 이후 카드 뒤집기 이미지 변경
             if (isFlipped)
             {
+                Debug.Log("앞");
                 cardRenderer.sprite = frontSprite;
             }
             else
             {
+                Debug.Log("뒤");
                 cardRenderer.sprite = backSprite;
             }
 
@@ -127,6 +132,11 @@ public class Card : MonoBehaviour
                 isFlipping = false;
             });
         });
+    }
+
+    public void CardReStart()
+    {
+        startFlipCheck = true;
     }
 
 

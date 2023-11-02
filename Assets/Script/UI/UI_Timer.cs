@@ -8,13 +8,13 @@ public class UI_Timer : MonoBehaviour
     [SerializeField]
     Text timerText;
 
-    bool timerActive;
+    public bool timerActive;
     float second;
     int min;
 
     void Start()
     {
-        SetTimerOn();
+        //SetTimerOn();
     }
 
     void Update() // 바뀌는 시간을 text에 반영 해 줄 update 생명주기
@@ -40,6 +40,13 @@ public class UI_Timer : MonoBehaviour
     public void SetTimerOff()
     {
         timerActive = false;
+    }
+
+    public void Init()
+    {
+        second = 0;
+        min = 0;
+
     }
 
 }

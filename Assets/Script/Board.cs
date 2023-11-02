@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    private LevelManager levelManager;
+    public static Board instance;
+    //private CardSelectEffect cardSelectEffect;
+    private UI_CountDown ui_CountDown;
 
     [SerializeField]
     private GameObject cardPrefab;
@@ -20,32 +22,47 @@ public class Board : MonoBehaviour
 
 
     [SerializeField]
-    private GameObject card_Matching_Success00;
+    public GameObject card_Matching_Success00;
     [SerializeField]
-    private GameObject card_Matching_Success01;
+    public GameObject card_Matching_Success01;
     [SerializeField]
-    private GameObject card_Matching_Mistake00;
+    public GameObject card_Matching_Mistake00;
     [SerializeField]
-    private GameObject card_Matching_Mistake01;
-
+    public GameObject card_Matching_Mistake01;
 
     private GameObject cardObject;
     private GameObject FindCardObject;
 
-    private List<int> cardIDList = new List<int>();
     private List<Card> cardList = new List<Card>();
+    private List<FindCard> findCardList = new List<FindCard>();
+
+    private List<int> cardIDList = new List<int>();
+    private List<GameObject> CardObjectList = new List<GameObject>();
+
     private List<int> findCardIDList = new List<int>();
     private List<GameObject> findCardObjectList = new List<GameObject>();
-    private List<FindCard> findCardList = new List<FindCard>();
 
     private int index = 0;
     private int deleteIndex = 0;
     private int objectIndex = 1;
 
+    public bool resetCheck = false;
+
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
 
     void Start()
     {
-        levelManager = FindObjectOfType<LevelManager>();
+        //cardSelectEffect = FindObjectOfType<CardSelectEffect>();
+        ui_CountDown = FindObjectOfType<UI_CountDown>();
+
         Debug.Log("확인");
 
         GenerateCardID();
@@ -60,30 +77,30 @@ public class Board : MonoBehaviour
         }
         catch
         {
-            Debug.Log("아직 게임 시작 화면이 아님");
+            Debug.Log("Start_아직 게임 시작 화면이 아님");
         };
     }
 
     public void Restart()
     {
-        //levelManager = FindObjectOfType<LevelManager>();
+        resetCheck = true;
 
-        //GenerateCardID();
+        Debug.Log("1111borad subleve: " + LevelManager.Instance.subLevel);
 
-        //ShuffleCardID();
-        //ShuffleFindCardID();
-        //try
-        //{
-        //    InitBoard();
-        //}
-        //catch
-        //{
-        //    Debug.Log("아직 게임 시작 화면이 아님");
-        //};
-        //    InitFindBoard();
+        GenerateCardID();
 
-        gameObject.GetComponent<Board>().enabled = false;
-        gameObject.GetComponent<Board>().enabled = true;
+        ShuffleCardID();
+        ShuffleFindCardID();
+
+
+        Debug.Log("2222borad subleve: " + LevelManager.Instance.subLevel);
+
+        InitBoard();
+        InitFindBoard();
+
+        Debug.Log("3333borad subleve: " + LevelManager.Instance.subLevel);
+        //ui_CountDown.SetCountDownOn();
+        GameManager.Instance.FlipAllCard();
     }
 
     //카드 생성
@@ -129,6 +146,7 @@ public class Board : MonoBehaviour
     void InitBoard()
     {
         GameObject cardGather = GameObject.Find("CardGather");
+
         //각 축 간격 (x: 1.1f, y:1.6f)
         float spaceY = -1.6f;
         float spaceX = 1.1f;
@@ -140,10 +158,21 @@ public class Board : MonoBehaviour
         //카드 인덱스
         int cardIndex = 0;
 
-        //배치 
-        for(int row = 0; row < rowCount; row++)
+
+        if (resetCheck)
         {
-            for(int col = 0; col < colCount; col++)
+            for(int i = 0; i < 48; i++)
+            {
+                //cardList.RemoveAt(i);
+                //Destroy(cardList[i]);
+                Destroy(CardObjectList[i]);
+            }      
+        }
+
+        //배치 
+        for (int row = 0; row < rowCount; row++)
+        {
+            for (int col = 0; col < colCount; col++)
             {
                 //각 X와 Y좌표
                 //posX의 경우 중앙에 맞추기 위해 -1 값 추가
@@ -154,12 +183,14 @@ public class Board : MonoBehaviour
                 cardObject = Instantiate(cardPrefab, pos, Quaternion.identity);
 
                 cardObject.transform.SetParent(cardGather.transform);
+                CardObjectList.Add(cardObject);
 
                 Card card = cardObject.GetComponent<Card>();
                 int cardID = cardIDList[cardIndex++];
                 card.SetCardID(cardID);
                 card.SetFrontSprite(cardSprite[cardID]);
                 cardList.Add(card);
+
 
                 if (cardIndex >= 48)
                 {
@@ -172,8 +203,8 @@ public class Board : MonoBehaviour
     //보드 초기화 후 찾아야할 카드 생성
     void InitFindBoard()
     {
-        Debug.Log("오류 확인" + levelManager.targetCardCount_Card);
-        int findcardCount = levelManager.targetCardCount_Card;
+        Debug.Log("오류 확인" + LevelManager.Instance.targetCardCount_Card);
+        int findcardCount = LevelManager.Instance.targetCardCount_Card;
         Debug.Log("찾아야할 카드 개수: " + findcardCount);
         int findCardIndex = 0;
 
@@ -190,10 +221,18 @@ public class Board : MonoBehaviour
             findCard.SetFindCardID(findCardID);
             findCard.SetFrontSprite(cardSprite[findCardID]);
             findCardList.Add(findCard);
-            
         }
+
+
         Debug.Log("오류 확인 리스트 체크" + findCardObjectList.Count);
-        findCardObjectList[0].SetActive(true);
+        if(resetCheck == false)
+        {
+            findCardObjectList[0].SetActive(true);
+
+        }else if(resetCheck == true)
+        {
+            findCardObjectList[3].SetActive(true);
+        }
     }
     
     //오브젝트 제거
@@ -202,6 +241,7 @@ public class Board : MonoBehaviour
         Destroy(findCardObjectList[deleteIndex++]);
         //리스트가 계속 0번째로 갱신되어 0번 리스트만 계속 삭제
         findCardList.RemoveAt(0);
+        //findCardObjectList.RemoveAt(deleteIndex);
         try
         {
             findCardObjectList[objectIndex++].SetActive(true);
@@ -228,19 +268,20 @@ public class Board : MonoBehaviour
     //카드 매칭 성공 실패 팝업
     public void CardMatchingResultPopup(bool check)
     {
+        int popupDivNum = 0;
         int randomIndex = UnityEngine.Random.Range(0, 2);
         Vector3 originalScale = transform.localScale;
         Debug.Log("Random00: " + randomIndex);
         Debug.Log("check" + check);
         if (check)
         {
-
-            Debug.Log("dkdkdkdkdkd");
             if (randomIndex == 0)
             {
-                Debug.Log("Random00" + randomIndex);
+                popupDivNum = 0;
+
+                //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Success00.SetActive(true);
-                //팝업제거
+                EffectManager.Instance.flowEffect.BoomEvent();
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
                     card_Matching_Success00.SetActive(false);
@@ -248,8 +289,11 @@ public class Board : MonoBehaviour
             }
             else
             {
-                Debug.Log("Random01" + randomIndex);
+                popupDivNum = 1;
+
+                //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Success01.SetActive(true);
+                EffectManager.Instance.flowEffect.BoomEvent();
                 //팝업제거
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
@@ -262,8 +306,11 @@ public class Board : MonoBehaviour
         {
             if (randomIndex == 0)
             {
-                Debug.Log("Random00" + randomIndex);
+                popupDivNum = 2;
+
+                //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Mistake00.SetActive(true);
+
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
                     card_Matching_Mistake00.SetActive(false);
@@ -271,8 +318,11 @@ public class Board : MonoBehaviour
             }
             else
             {
-                Debug.Log("Random01" + randomIndex);
+                popupDivNum = 3;
+
+                //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Mistake01.SetActive(true);
+
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
                     card_Matching_Mistake01.SetActive(false);
@@ -282,5 +332,9 @@ public class Board : MonoBehaviour
         }
 
     }
+
+
+
+
 
 }

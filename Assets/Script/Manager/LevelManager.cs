@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    private Board board;
+    public static LevelManager Instance;
+    [SerializeField]
+    private UI_Timer ui_Timer;
+    [SerializeField]
+    private UI_CountDown ui_CountDown;
 
     public string leveltext;
-    public int mainLevel; //게임 메인 레벨(쉬움, 보통, 어려움)
-    public int subLevel; //게임 서브 레벨 (쉬움 1단계, 쉬움 2단계, ... 총 5단계까지 )
+    public int mainLevel = 1; //게임 메인 레벨(쉬움, 보통, 어려움)
+    public int subLevel = 1; //게임 서브 레벨 (쉬움 1단계, 쉬움 2단계, ... 총 5단계까지 )
     public int findCount; //찾은 개수
     public int targetCount; // 목표 개수
     public int targetCardCount_Card; // 찾아야 할 화투패 위 개수
@@ -22,6 +26,14 @@ public class LevelManager : MonoBehaviour
     private GameObject gamePlay;
 
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+    }
+
     public void Level_Easy()
     {
         // 처음 단계 시작시 mainLevel = 1, subLevel = 1 로 시작
@@ -32,9 +44,9 @@ public class LevelManager : MonoBehaviour
 
         if (gameSelect.activeSelf)
         {
-            Debug.Log("레벨 선택@@@@@@@");
             mainLevel = 1;
             subLevel = 1;
+            Debug.Log("난이도 선택 화면!!");
         }
         else
         {
@@ -54,7 +66,9 @@ public class LevelManager : MonoBehaviour
             Debug.Log("레벨 선택 메소드");
             leveltext = "쉬움 - 1단계";
 
-            subLevel = +1;
+            subLevel = subLevel +1;
+
+            Debug.Log("sublevel 업" + subLevel);
             GameSelect_Obejct_Off();
         }
         else if(mainLevel == 1 && subLevel == 2)
@@ -189,44 +203,34 @@ public class LevelManager : MonoBehaviour
         if (findCount == targetCount)
         {
             Debug.Log("라운드 종료");
-            subLevel = +1;
+            subLevel =+ 1;
             GameManager.Instance.isFlipping = true;
-            gameFinishPopup.SetActive(true);
+            //이펙트
+            EffectManager.Instance.popupEffect.PanelFadeIn();
+            EffectManager.Instance.ui_confettiEffect_L.Show();
+            EffectManager.Instance.ui_confettiEffect_R.Show();
+
+            //타이머 종료
+            ui_Timer.SetTimerOff();
+
         }
     }
 
 
     public void Restart()
     {
-        board = FindObjectOfType<Board>();
+        Debug.Log("재시작");
 
-        Debug.Log("어디까지");
-
-        if(mainLevel == 1)
-        {
-            Debug.Log("가는지");
-            Level_Easy();
-        }
-        else if(mainLevel == 2)
-        {
-            Level_Normal();
-        }
-        else if(mainLevel == 3)
-        {
-            Level_Hard();
-        }
 
         subLevel--;
 
-        //board.Restart();
+        ui_Timer.Init();
+        findCount = 0;
+
+        Board.instance.Restart();
         gameFinishPopup.SetActive(false);
+        ui_CountDown.SetCountDownOn();
         GameManager.Instance.isFlipping = false;
-    }
-
-
-    public void NextLevel()
-    {
-        board = FindObjectOfType<Board>();
 
         if (mainLevel == 1)
         {
@@ -241,9 +245,35 @@ public class LevelManager : MonoBehaviour
             Level_Hard();
         }
 
-        //board.Restart();
+    }
+
+
+    public void NextLevel()
+    {
+        Debug.Log("다음 레벨");
+        Debug.Log("sublevel 체크" + subLevel);
+
+        ui_Timer.Init();
+        findCount = 0;
+
+        Board.instance.Restart();
         gameFinishPopup.SetActive(false);
+
         GameManager.Instance.isFlipping = false;
+
+        if (mainLevel == 1)
+        {
+            Level_Easy();
+        }
+        else if (mainLevel == 2)
+        {
+            Level_Normal();
+        }
+        else if (mainLevel == 3)
+        {
+            Level_Hard();
+        }
+
     }
 
     private void GameSelect_Obejct_Off()

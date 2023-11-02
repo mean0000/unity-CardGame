@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class PageManager : MonoBehaviour
 {
+    public static PageManager Instance;
+
     [SerializeField]
     private GameObject gameStart;
     [SerializeField] 
@@ -12,22 +17,64 @@ public class PageManager : MonoBehaviour
     private GameObject gameAgree;
     [SerializeField]
     private GameObject gameSelect;
+    [SerializeField]
+    private GameObject gameEffect;
 
-    public void ButtonEvent_Start()
+    [SerializeField]
+    private Image BlackBack;
+    private Sprite BlackBack2;
+    //암전되는 시간
+    float fadeDuration = 1.2f;
+
+    void Awake()
     {
-        gameStart.SetActive(false);
-        gameAgree.SetActive(true);
+        if (Instance == null)
+        {
+            Instance = this;
+        }
     }
 
-    public void CameraView()
+    public void ChangeView_Load(int viewDivnum)
     {
-        //카메라 기능 개발 후 이용
-    }
-
-    public void ButtonEvent_Agree()
-    {
-        gameAgree.SetActive(false);
-        gameSelect.SetActive(true);
+        switch (viewDivnum)
+        {
+            case 0:
+                gameStart.SetActive(false);
+                gameAgree.SetActive(true);
+                break;
+            case 1:
+                gameAgree.SetActive(false);
+                gameSelect.SetActive(true);
+                break;
+            case 2:
+                gameAgree.SetActive(false);
+                gameSelect.SetActive(true);
+                break;
+            case 3:
+                gameEffect.SetActive(false);
+                BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
+                {
+                    LevelManager.Instance.Level_Easy();
+                    BlackBack.DOFade(0, fadeDuration);
+                });
+                break;
+            case 4:
+                gameEffect.SetActive(false);
+                BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
+                {
+                    LevelManager.Instance.Level_Normal();
+                    BlackBack.DOFade(0, fadeDuration);
+                });
+                break;
+            case 5:
+                gameEffect.SetActive(false);
+                BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
+                {
+                    LevelManager.Instance.Level_Hard();
+                    BlackBack.DOFade(0, fadeDuration);
+                });
+                break;
+        }
     }
 
     public void ButtonEvent_Disagree()
