@@ -582,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui_Timer: {fileID: 901657969}
-  ui_CountDown: {fileID: 988688563}
+  ui_CountDown: {fileID: 0}
   leveltext: 
   mainLevel: 1
   subLevel: 1
@@ -4317,6 +4317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14be65fe243504d4593ffc595c578ff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flippedCard: {fileID: 0}
+  waitingCard: {fileID: 0}
+  allCards: []
+  allfindCardList: []
   isFlipping: 0
 --- !u!4 &844089140
 Transform:
@@ -5255,7 +5259,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 988688562}
-  - component: {fileID: 988688563}
   m_Layer: 5
   m_Name: UI_CountDown
   m_TagString: Untagged
@@ -5287,23 +5290,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &988688563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988688561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6ca1709233fe04f94b1b5d7dafae95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  invisible_BackGround: {fileID: 385699537}
-  countDown_Start: {fileID: 1096915288}
-  countDown_1: {fileID: 193424981}
-  countDown_2: {fileID: 573047618}
-  countDown_3: {fileID: 162051656}
 --- !u!1 &1017826344
 GameObject:
   m_ObjectHideFlags: 0
@@ -9972,11 +9958,16 @@ MonoBehaviour:
   - {fileID: -6130527377165402433, guid: e049cdf580e3da54e9c47a07dca49d93, type: 3}
   - {fileID: 2942841488497212222, guid: e049cdf580e3da54e9c47a07dca49d93, type: 3}
   - {fileID: -5265248010327127771, guid: e049cdf580e3da54e9c47a07dca49d93, type: 3}
-  card_Matching_Success00: {fileID: 1611855877}
-  card_Matching_Success01: {fileID: 392417036}
-  card_Matching_Mistake00: {fileID: 1394995916}
-  card_Matching_Mistake01: {fileID: 1674307684}
+  card_Matching_Success00: {fileID: 1868824362}
+  card_Matching_Success01: {fileID: 164160159}
+  card_Matching_Mistake00: {fileID: 45388597}
+  card_Matching_Mistake01: {fileID: 293387920}
   resetCheck: 0
+  invisible_BackGround: {fileID: 385699537}
+  countDown_Start: {fileID: 1096915288}
+  countDown_1: {fileID: 193424981}
+  countDown_2: {fileID: 573047618}
+  countDown_3: {fileID: 162051656}
 --- !u!1 &1930373862
 GameObject:
   m_ObjectHideFlags: 0

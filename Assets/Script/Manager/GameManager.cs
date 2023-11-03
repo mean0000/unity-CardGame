@@ -6,11 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    private Card flippedCard;
-    private FindCard waitingCard;
+    public Card flippedCard;
+    public FindCard waitingCard;
     
-    private List<Card> allCards;
-    private List<FindCard> allfindCardList;
+    public List<Card> allCards;
+    public List<FindCard> allfindCardList;
     public bool isFlipping = false;
 
 
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         isFlipping = true;
         yield return new WaitForSeconds(0.5f);
         FlipAllCard();
+        Debug.Log("이곳은 게임 매니저");
         yield return new WaitForSeconds(1f);
         isFlipping = false;
     }
@@ -41,9 +42,9 @@ public class GameManager : MonoBehaviour
 
     public void FlipAllCard()
     {
+        Debug.Log("여기가 시작 뒤집기");
         foreach(Card card in allCards) 
         {
-            Debug.Log("여기가 시작 뒤집기");
             card.StartFlipCard();
         }
     }
@@ -128,6 +129,4 @@ public class GameManager : MonoBehaviour
         //게임 상황 체크
         LevelManager.Instance.GamePlayingCheck();
     }
-
-
 }

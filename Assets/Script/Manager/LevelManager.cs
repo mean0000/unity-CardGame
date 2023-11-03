@@ -221,16 +221,19 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("재시작");
 
-
-        subLevel--;
+        //subLevel--;
 
         ui_Timer.Init();
         findCount = 0;
 
+        
         Board.instance.Restart();
+        //ui_CountDown.SetCountDownOn();
         gameFinishPopup.SetActive(false);
-        ui_CountDown.SetCountDownOn();
+
+        Debug.Log("gg");
         GameManager.Instance.isFlipping = false;
+
 
         if (mainLevel == 1)
         {

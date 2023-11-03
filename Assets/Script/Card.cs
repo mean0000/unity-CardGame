@@ -6,13 +6,13 @@ using DG.Tweening;
 public class Card : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer cardRenderer;
+    public SpriteRenderer cardRenderer;
 
     [SerializeField]
-    private Sprite frontSprite;
+    public Sprite frontSprite;
 
     [SerializeField]
-    private Sprite backSprite;
+    public Sprite backSprite;
 
     
     //카드 뒤집기 체크

@@ -8,7 +8,8 @@ public class Board : MonoBehaviour
 {
     public static Board instance;
     //private CardSelectEffect cardSelectEffect;
-    private UI_CountDown ui_CountDown;
+    //private UI_CountDown ui_CountDown;
+    private UI_Timer ui_Timer;
 
     [SerializeField]
     private GameObject cardPrefab;
@@ -49,6 +50,25 @@ public class Board : MonoBehaviour
     public bool resetCheck = false;
 
 
+    //카운트다운
+    [SerializeField]
+    private GameObject invisible_BackGround;
+    [SerializeField]
+    private GameObject countDown_Start;
+    [SerializeField]
+    private GameObject countDown_1;
+    [SerializeField]
+    private GameObject countDown_2;
+    [SerializeField]
+    private GameObject countDown_3;
+
+    //Timer
+    private bool countDonw_Check = false;
+    private float currentTime = 0;
+    private int count = 0;
+
+
+
     void Awake()
     {
         if (instance == null)
@@ -61,7 +81,7 @@ public class Board : MonoBehaviour
     void Start()
     {
         //cardSelectEffect = FindObjectOfType<CardSelectEffect>();
-        ui_CountDown = FindObjectOfType<UI_CountDown>();
+        //ui_CountDown = FindObjectOfType<UI_CountDown>();
 
         Debug.Log("확인");
 
@@ -87,7 +107,7 @@ public class Board : MonoBehaviour
 
         Debug.Log("1111borad subleve: " + LevelManager.Instance.subLevel);
 
-        GenerateCardID();
+        //GenerateCardID();
 
         ShuffleCardID();
         ShuffleFindCardID();
@@ -100,14 +120,16 @@ public class Board : MonoBehaviour
 
         Debug.Log("3333borad subleve: " + LevelManager.Instance.subLevel);
         //ui_CountDown.SetCountDownOn();
-        GameManager.Instance.FlipAllCard();
+        SetCountDownOn();
+        //ui_CountDown.SetCountDownOn();
+        //GameManager.Instance.FlipAllCard();
     }
 
     //카드 생성
     void GenerateCardID()
     {
         for(int i = 0; i < cardSprite.Length; i++) 
-        { 
+        {
             cardIDList.Add(i);
         }
 
@@ -166,6 +188,7 @@ public class Board : MonoBehaviour
                 //cardList.RemoveAt(i);
                 //Destroy(cardList[i]);
                 Destroy(CardObjectList[i]);
+                //CardObjectList.RemoveAt(i);
             }      
         }
 
@@ -334,7 +357,47 @@ public class Board : MonoBehaviour
     }
 
 
+    IEnumerator GameStart_CountDown_2()
+    {
+        if (countDonw_Check)
+        {
+            invisible_BackGround.SetActive(true);
+            countDown_3.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
 
+            countDown_3.SetActive(false);
+            countDown_2.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
 
+            countDown_2.SetActive(false);
+            countDown_1.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+
+            countDown_1.SetActive(false);
+            countDown_Start.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+
+            countDown_Start.SetActive(false);
+            invisible_BackGround.SetActive(false);
+            yield return new WaitForSeconds(1.0f);
+
+            count++;
+            if (count == 1 && resetCheck)
+            {
+                Debug.Log("카운트 다운 뒤집");
+                //GameManager.Instance.FlipAllCard();
+                //GameManager.Instance.StartCoroutine("FlipAllCardRoutine");
+            }
+            ui_Timer.SetTimerOn();
+            count = 0;
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    public void SetCountDownOn()
+    {
+        countDonw_Check = true;
+        StartCoroutine("GameStart_CountDown_2");
+    }
 
 }
