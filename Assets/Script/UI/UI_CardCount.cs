@@ -13,16 +13,16 @@ public class UI_CardCount : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {        
-        cardFindCount.text = LevelManager.Instance.findCount.ToString();
-        cardTargetCount.text = LevelManager.Instance.targetCount.ToString();
-        cardBackTargetCount.text = LevelManager.Instance.targetCount.ToString();
+        cardFindCount.text = LevelManager.findCount.ToString();
+        cardTargetCount.text = LevelManager.targetCount.ToString();
+        cardBackTargetCount.text = LevelManager.targetCount.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-       cardFindCount.text = LevelManager.Instance.findCount.ToString();
-       cardBackTargetCount.text = (LevelManager.Instance.targetCount - LevelManager.Instance.findCount).ToString("D2");
+       cardFindCount.text = LevelManager.findCount.ToString();
+       cardBackTargetCount.text = (LevelManager.targetCount - LevelManager.findCount).ToString("D2");
     }
 }
 

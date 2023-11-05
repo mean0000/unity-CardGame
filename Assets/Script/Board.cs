@@ -8,7 +8,7 @@ public class Board : MonoBehaviour
 {
     public static Board instance;
     //private CardSelectEffect cardSelectEffect;
-    //private UI_CountDown ui_CountDown;
+    private UI_CountDown ui_CountDown;
     private UI_Timer ui_Timer;
 
     [SerializeField]
@@ -47,26 +47,7 @@ public class Board : MonoBehaviour
     private int deleteIndex = 0;
     private int objectIndex = 1;
 
-    public bool resetCheck = false;
-
-
-    //카운트다운
-    [SerializeField]
-    private GameObject invisible_BackGround;
-    [SerializeField]
-    private GameObject countDown_Start;
-    [SerializeField]
-    private GameObject countDown_1;
-    [SerializeField]
-    private GameObject countDown_2;
-    [SerializeField]
-    private GameObject countDown_3;
-
-    //Timer
-    private bool countDonw_Check = false;
-    private float currentTime = 0;
-    private int count = 0;
-
+    public static bool resetCheck = false;
 
 
     void Awake()
@@ -81,9 +62,11 @@ public class Board : MonoBehaviour
     void Start()
     {
         //cardSelectEffect = FindObjectOfType<CardSelectEffect>();
-        //ui_CountDown = FindObjectOfType<UI_CountDown>();
+        ui_CountDown = FindObjectOfType<UI_CountDown>();
 
         Debug.Log("확인");
+
+        ui_CountDown.SetCountDownOn();
 
         GenerateCardID();
 
@@ -104,25 +87,6 @@ public class Board : MonoBehaviour
     public void Restart()
     {
         resetCheck = true;
-
-        Debug.Log("1111borad subleve: " + LevelManager.Instance.subLevel);
-
-        //GenerateCardID();
-
-        ShuffleCardID();
-        ShuffleFindCardID();
-
-
-        Debug.Log("2222borad subleve: " + LevelManager.Instance.subLevel);
-
-        InitBoard();
-        InitFindBoard();
-
-        Debug.Log("3333borad subleve: " + LevelManager.Instance.subLevel);
-        //ui_CountDown.SetCountDownOn();
-        SetCountDownOn();
-        //ui_CountDown.SetCountDownOn();
-        //GameManager.Instance.FlipAllCard();
     }
 
     //카드 생성
@@ -180,16 +144,20 @@ public class Board : MonoBehaviour
         //카드 인덱스
         int cardIndex = 0;
 
-
         if (resetCheck)
         {
-            for(int i = 0; i < 48; i++)
+            Debug.Log("오류가 여기서" + CardObjectList.Count);
+            for (int i = 0; i < 48; i++)
             {
-                //cardList.RemoveAt(i);
-                //Destroy(cardList[i]);
-                Destroy(CardObjectList[i]);
+                Debug.Log("i의 값: " + i);
                 //CardObjectList.RemoveAt(i);
-            }      
+                Destroy(CardObjectList[i]);
+            }
+
+            for (int i = CardObjectList.Count - 1; i >= 0; i--)
+            {
+                CardObjectList.Remove(CardObjectList[i]);
+            }
         }
 
         //배치 
@@ -226,8 +194,8 @@ public class Board : MonoBehaviour
     //보드 초기화 후 찾아야할 카드 생성
     void InitFindBoard()
     {
-        Debug.Log("오류 확인" + LevelManager.Instance.targetCardCount_Card);
-        int findcardCount = LevelManager.Instance.targetCardCount_Card;
+        Debug.Log("오류 확인" + LevelManager.targetCardCount_Card);
+        int findcardCount = LevelManager.targetCardCount_Card;
         Debug.Log("찾아야할 카드 개수: " + findcardCount);
         int findCardIndex = 0;
 
@@ -357,47 +325,6 @@ public class Board : MonoBehaviour
     }
 
 
-    IEnumerator GameStart_CountDown_2()
-    {
-        if (countDonw_Check)
-        {
-            invisible_BackGround.SetActive(true);
-            countDown_3.SetActive(true);
-            yield return new WaitForSeconds(1.0f);
 
-            countDown_3.SetActive(false);
-            countDown_2.SetActive(true);
-            yield return new WaitForSeconds(1.0f);
-
-            countDown_2.SetActive(false);
-            countDown_1.SetActive(true);
-            yield return new WaitForSeconds(1.0f);
-
-            countDown_1.SetActive(false);
-            countDown_Start.SetActive(true);
-            yield return new WaitForSeconds(1.0f);
-
-            countDown_Start.SetActive(false);
-            invisible_BackGround.SetActive(false);
-            yield return new WaitForSeconds(1.0f);
-
-            count++;
-            if (count == 1 && resetCheck)
-            {
-                Debug.Log("카운트 다운 뒤집");
-                //GameManager.Instance.FlipAllCard();
-                //GameManager.Instance.StartCoroutine("FlipAllCardRoutine");
-            }
-            ui_Timer.SetTimerOn();
-            count = 0;
-            yield return new WaitForSeconds(1.0f);
-        }
-    }
-
-    public void SetCountDownOn()
-    {
-        countDonw_Check = true;
-        StartCoroutine("GameStart_CountDown_2");
-    }
 
 }

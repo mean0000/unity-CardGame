@@ -29,9 +29,11 @@ public class Card : MonoBehaviour
 
 
 
+
     public void SetCardID(int id)
     { 
-        cardID = id; 
+        cardID = id;
+        Debug.Log("카드 아이디 생성");
     }
 
     public void SetMatched() 
@@ -64,17 +66,17 @@ public class Card : MonoBehaviour
             isFlipped = !isFlipped;
 
             //시작 화면 첫 뒤집기 이미지 변경
-            if (startFlipCheck)
+            if (startFlipCheck )
             {
                 
                 if (isFlipped)
                 {
-                    
+                    Debug.Log("뒤!!!");
                     cardRenderer.sprite = frontSprite;
                 }
                 else
                 {
-                    
+                    Debug.Log("앞!!!");
                     cardRenderer.sprite = backSprite;
                 }
                 startFlipCheck = false;
@@ -90,12 +92,12 @@ public class Card : MonoBehaviour
             if (isFlipped)
             {
                 Debug.Log("앞");
-                cardRenderer.sprite = frontSprite;
+                cardRenderer.sprite = backSprite;
             }
             else
             {
                 Debug.Log("뒤");
-                cardRenderer.sprite = backSprite;
+                cardRenderer.sprite = frontSprite;
             }
 
             //뒤집은 카드를 다시 뒤집는 작업
@@ -120,11 +122,13 @@ public class Card : MonoBehaviour
 
             if (isFlipped)
             {
-                cardRenderer.sprite = frontSprite;
+                cardRenderer.sprite = backSprite;
+                Debug.Log("addddddddddddddd");
             }
             else
             {
-                cardRenderer.sprite = backSprite;
+                cardRenderer.sprite = frontSprite;
+                Debug.Log("addcscawgvawvawv");
             }
 
             transform.DOScale(originalScale, 0.2f).OnComplete(() =>

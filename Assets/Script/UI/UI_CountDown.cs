@@ -36,11 +36,12 @@ public class UI_CountDown : MonoBehaviour
         StartCoroutine("GameStart_CountDown_2");
     }
 
-
-
-
     IEnumerator GameStart_CountDown_2()
     {
+        //if(Board.resetCheck)
+        //{
+        //    GameManager.Instance.FlipAllCard();
+        //}
         if (CountDonw_Check)
         {
             invisible_BackGround.SetActive(true);
@@ -64,7 +65,7 @@ public class UI_CountDown : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
 
             count++;
-            if (count == 1 && Board.instance.resetCheck)
+            if (count == 1)
             {
                 Debug.Log("카운트 다운 뒤집");
                 GameManager.Instance.FlipAllCard();
@@ -106,7 +107,7 @@ public class UI_CountDown : MonoBehaviour
                                 invisible_BackGround.SetActive(false);
                                 ////카운트다운 후 시간이 흐르도록 변경
                                 count++;
-                                if (count == 1 && Board.instance.resetCheck)
+                                if (count == 1 && Board.resetCheck)
                                 {
                                     Debug.Log("카운트 다운 뒤집");
                                     //GameManager.Instance.FlipAllCard();

@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     {
         allCards = Board.instance.GetCards();
 
-        StartCoroutine("FlipAllCardRoutine");
+        //StartCoroutine("FlipAllCardRoutine");
     }
 
     IEnumerator FlipAllCardRoutine()
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (Board.instance.resetCheck)
+        if (Board.resetCheck)
         {
             card.CardReStart();
         }
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
             card.SetMatched();
             Debug.Log("Same Card");
             //찾은 개수 증가
-            LevelManager.Instance.findCount++;
+            LevelManager.findCount++;
 
             //카드 삭제
             Board.instance.SameCardDestory();
