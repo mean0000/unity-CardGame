@@ -110,6 +110,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Different Card");
 
+            //점수 저장
+            ScoreManager.instance.ForcusScore_Save();
+
             //카드 맞추기 실패
             yield return new WaitForSeconds(0.3f);
             card_Matching_Result = false;

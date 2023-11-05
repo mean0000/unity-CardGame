@@ -27,7 +27,6 @@ public class UI_Timer : MonoBehaviour
                 min += 1;
                 second = 0;
             }
-
             timerText.text = string.Format("{0:D2}  {1:D2}", min, (int)second);
         }
     }
@@ -40,6 +39,7 @@ public class UI_Timer : MonoBehaviour
     public void SetTimerOff()
     {
         timerActive = false;
+        ScoreManager.instance.Time_Score_Save((int)second);
     }
 
     public void Init()

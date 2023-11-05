@@ -19,6 +19,10 @@ public class PageManager : MonoBehaviour
     private GameObject gameSelect;
     [SerializeField]
     private GameObject gameEffect;
+    [SerializeField]
+    private GameObject gamePlay;
+    [SerializeField]
+    private GameObject gameResult;
 
     [SerializeField]
     private Image BlackBack;
@@ -72,6 +76,15 @@ public class PageManager : MonoBehaviour
                 {
                     LevelManager.Instance.Level_Hard();
                     BlackBack.DOFade(0, fadeDuration);
+                });
+                break;
+
+            case 6:
+                //gameEffect.SetActive(false);
+                BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
+                {
+                    gamePlay.SetActive(false);
+                    gameResult.SetActive(true);
                 });
                 break;
         }

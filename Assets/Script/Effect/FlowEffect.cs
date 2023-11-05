@@ -19,7 +19,7 @@ public class FlowEffect: MonoBehaviour
     void Start()
     {
         CloudMove();
-        StartCoroutine("BoomEffect");
+        //StartCoroutine("BoomEffect");
     }
 
 

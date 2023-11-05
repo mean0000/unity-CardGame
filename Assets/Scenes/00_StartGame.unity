@@ -1371,7 +1371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &551680548
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1404,8 +1404,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 0
-  canvasGroup: {fileID: 0}
-  rectTransform: {fileID: 0}
+  canvasGroup_Finsh: {fileID: 0}
+  rectTransform_Finsh: {fileID: 0}
+  canvasGroup_Result: {fileID: 0}
+  rectTransform_Result: {fileID: 0}
 --- !u!1 &570197981
 GameObject:
   m_ObjectHideFlags: 0

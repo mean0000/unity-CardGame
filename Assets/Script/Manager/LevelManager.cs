@@ -61,6 +61,7 @@ public class LevelManager : MonoBehaviour
 
         //gamePlay.SetActive(true);
         Debug.Log("sublevel:" + subLevel);
+        subLevel = 4;
 
         if (mainLevel == 0 && subLevel == 0) 
         {
@@ -205,8 +206,15 @@ public class LevelManager : MonoBehaviour
             Debug.Log("라운드 종료");
 
             GameManager.Instance.isFlipping = true;
+            
             //이펙트
-            EffectManager.Instance.popupEffect.PanelFadeIn();
+            if(subLevel <= 3)
+            {
+                EffectManager.Instance.popupEffect.PanelFadeIn();
+            }else if(subLevel == 4)
+            {
+                EffectManager.Instance.popupEffect.PanelFadeIn_Rusult();
+            }
             EffectManager.Instance.ui_confettiEffect_L.Show();
             EffectManager.Instance.ui_confettiEffect_R.Show();
 
@@ -221,17 +229,11 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("재시작");
 
-        //subLevel--;
-
-        //ui_Timer.Init();
         findCount = 0;
 
-        //Board.instance.Restart();
-        //ui_CountDown.SetCountDownOn();
+        //ui_Timer.Init();
         //gameFinishPopup.SetActive(false);
-
         //GameManager.Instance.isFlipping = false;
-
 
         if (mainLevel == 0)
         {
