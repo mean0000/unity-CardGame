@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public List<Card> allCards;
     public List<FindCard> allfindCardList;
     public bool isFlipping = false;
+    public bool timeCheck = false;
+    public float second;
 
 
     void Awake()
@@ -25,8 +27,17 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         allCards = Board.instance.GetCards();
-
+        timeCheck = true;
         //StartCoroutine("FlipAllCardRoutine");
+    }
+
+    void Update()
+    {
+        //집중력 체크
+        if (timeCheck)
+        {
+            second += Time.deltaTime;
+        }
     }
 
     IEnumerator FlipAllCardRoutine()
@@ -58,7 +69,6 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-
         card.FlipCard();
         flippedCard = card;
         allfindCardList = Board.instance.GetFindCardList();
@@ -80,13 +90,10 @@ public class GameManager : MonoBehaviour
 
         isFlipping = true;
 
-
-
         if (Board.resetCheck)
         {
             card.CardReStart();
         }
-
 
         if (card.cardID == findcard.findCardID)
         {
@@ -94,6 +101,9 @@ public class GameManager : MonoBehaviour
             Debug.Log("Same Card");
             //찾은 개수 증가
             LevelManager.findCount++;
+
+            //집중력 체크
+            Forcus_Scroecheck();
 
             //카드 삭제
             Board.instance.SameCardDestory();
@@ -111,7 +121,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Different Card");
 
             //점수 저장
-            ScoreManager.instance.ForcusScore_Save();
+            ScoreManager.instance.Memory_Score_Save();
 
             //카드 맞추기 실패
             yield return new WaitForSeconds(0.3f);
@@ -128,8 +138,16 @@ public class GameManager : MonoBehaviour
         isFlipping = false;
         flippedCard = null;
 
-
         //게임 상황 체크
         LevelManager.Instance.GamePlayingCheck();
+    }
+
+    //집중력 체크
+    public void Forcus_Scroecheck()
+    {
+        timeCheck = false;
+        ScoreManager.instance.Forcus_Score_Save((int)second);
+        second = 0;
+        timeCheck = true;
     }
 }

@@ -26,7 +26,8 @@ public class PageManager : MonoBehaviour
 
     [SerializeField]
     private Image BlackBack;
-    private Sprite BlackBack2;
+    [SerializeField]
+    private Image BlackBack2;
     //암전되는 시간
     float fadeDuration = 1.2f;
 
@@ -44,11 +45,14 @@ public class PageManager : MonoBehaviour
         {
             case 0:
                 gameStart.SetActive(false);
-                gameAgree.SetActive(true);
+                camera.SetActive(true);
                 break;
             case 1:
-                gameAgree.SetActive(false);
-                gameSelect.SetActive(true);
+                BlackBack2.DOFade(2, fadeDuration).OnComplete(() =>
+                {
+                    camera.SetActive(false);
+                    gameAgree.SetActive(true);
+                });
                 break;
             case 2:
                 gameAgree.SetActive(false);

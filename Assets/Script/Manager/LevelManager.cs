@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
 
         //gamePlay.SetActive(true);
         Debug.Log("sublevel:" + subLevel);
-        subLevel = 4;
+        //subLevel = 4;
 
         if (mainLevel == 0 && subLevel == 0) 
         {
