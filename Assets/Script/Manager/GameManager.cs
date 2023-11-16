@@ -33,11 +33,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //집중력 체크
-        if (timeCheck)
-        {
-            second += Time.deltaTime;
-        }
+
     }
 
     IEnumerator FlipAllCardRoutine()
@@ -45,7 +41,6 @@ public class GameManager : MonoBehaviour
         isFlipping = true;
         yield return new WaitForSeconds(0.5f);
         FlipAllCard();
-        Debug.Log("이곳은 게임 매니저");
         yield return new WaitForSeconds(1f);
         isFlipping = false;
     }
@@ -53,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void FlipAllCard()
     {
-        Debug.Log("여기가 시작 뒤집기");
+        //Debug.Log("여기가 시작 뒤집기");
         foreach(Card card in allCards) 
         {
             card.StartFlipCard();
@@ -103,7 +98,7 @@ public class GameManager : MonoBehaviour
             LevelManager.findCount++;
 
             //집중력 체크
-            Forcus_Scroecheck();
+            UI_Timer.instance.Forcus_Scroecheck();
 
             //카드 삭제
             Board.instance.SameCardDestory();
@@ -140,14 +135,5 @@ public class GameManager : MonoBehaviour
 
         //게임 상황 체크
         LevelManager.Instance.GamePlayingCheck();
-    }
-
-    //집중력 체크
-    public void Forcus_Scroecheck()
-    {
-        timeCheck = false;
-        ScoreManager.instance.Forcus_Score_Save((int)second);
-        second = 0;
-        timeCheck = true;
     }
 }

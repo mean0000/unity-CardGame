@@ -33,7 +33,7 @@ public class Card : MonoBehaviour
     public void SetCardID(int id)
     { 
         cardID = id;
-        Debug.Log("카드 아이디 생성");
+        //Debug.Log("카드 아이디 생성");
     }
 
     public void SetMatched() 
@@ -51,7 +51,7 @@ public class Card : MonoBehaviour
     //카드 뒤집기 이펙트
     public void FlipCard()
     {
-        Debug.Log("FlipCard");
+        //Debug.Log("FlipCard");
         isFlipping = true;
         //최초의 값
         Vector3 originalScale = transform.localScale;
@@ -71,12 +71,12 @@ public class Card : MonoBehaviour
                 
                 if (isFlipped)
                 {
-                    Debug.Log("뒤!!!");
+                    //Debug.Log("뒤!!!");
                     cardRenderer.sprite = frontSprite;
                 }
                 else
                 {
-                    Debug.Log("앞!!!");
+                    //Debug.Log("앞!!!");
                     cardRenderer.sprite = backSprite;
                 }
                 startFlipCheck = false;
@@ -87,16 +87,16 @@ public class Card : MonoBehaviour
                 });
                 return;
             }
-            Debug.Log("스타트");
+            //Debug.Log("스타트");
             //그 이후 카드 뒤집기 이미지 변경
             if (isFlipped)
             {
-                Debug.Log("앞");
+                //Debug.Log("앞");
                 cardRenderer.sprite = backSprite;
             }
             else
             {
-                Debug.Log("뒤");
+                //Debug.Log("뒤");
                 cardRenderer.sprite = frontSprite;
             }
 
@@ -106,7 +106,7 @@ public class Card : MonoBehaviour
                 isFlipping = false;
             });
         });
-        Debug.Log("FlipCard_End");
+        //Debug.Log("FlipCard_End");
     }
 
     //시작 시 카드 뒤집기 이펙트 메소드
@@ -123,14 +123,11 @@ public class Card : MonoBehaviour
             if (isFlipped)
             {
                 cardRenderer.sprite = backSprite;
-                Debug.Log("addddddddddddddd");
             }
             else
             {
                 cardRenderer.sprite = frontSprite;
-                Debug.Log("addcscawgvawvawv");
             }
-
             transform.DOScale(originalScale, 0.2f).OnComplete(() =>
             {
                 isFlipping = false;
@@ -150,7 +147,7 @@ public class Card : MonoBehaviour
         if (!isFlipping  && !isMatched)
         {
             //FlipCard();
-            Debug.Log("카드 뒤집는다");
+            //Debug.Log("카드 뒤집는다");
             GameManager.Instance.CardClicked(this);
         }
     }

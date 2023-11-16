@@ -35,7 +35,7 @@ public class PopupEffect : MonoBehaviour
     //사라지는
     public void PanelFadeOut()
     {
-        Debug.Log("왜 아노디지");
+        Debug.Log("이펙트 아웃");
         canvasGroup_Finsh.alpha = 1f;
         rectTransform_Finsh.transform.localScale = new Vector3(1f, 1f, 1f);
         rectTransform_Finsh.DOAnchorPos(new Vector2(0f, -10f), fadeTime, false).SetEase(Ease.InOutQuint);

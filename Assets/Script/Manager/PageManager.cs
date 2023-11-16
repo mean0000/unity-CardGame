@@ -12,9 +12,9 @@ public class PageManager : MonoBehaviour
     [SerializeField]
     private GameObject gameStart;
     [SerializeField] 
-    private GameObject camera;
-    [SerializeField]
     private GameObject gameAgree;
+    [SerializeField]
+    private GameObject camera;
     [SerializeField]
     private GameObject gameSelect;
     [SerializeField]
@@ -45,18 +45,18 @@ public class PageManager : MonoBehaviour
         {
             case 0:
                 gameStart.SetActive(false);
-                camera.SetActive(true);
+                gameAgree.SetActive(true);
                 break;
             case 1:
+                gameAgree.SetActive(false);
+                camera.SetActive(true);
+                break;
+            case 2:
                 BlackBack2.DOFade(2, fadeDuration).OnComplete(() =>
                 {
                     camera.SetActive(false);
-                    gameAgree.SetActive(true);
+                    gameSelect.SetActive(true);
                 });
-                break;
-            case 2:
-                gameAgree.SetActive(false);
-                gameSelect.SetActive(true);
                 break;
             case 3:
                 gameEffect.SetActive(false);

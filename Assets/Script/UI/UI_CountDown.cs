@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UI_CountDown : MonoBehaviour
 {
-    private UI_Timer ui_Timer;
+    //private UI_Timer ui_Timer;
 
     [SerializeField]
     private GameObject invisible_BackGround;
@@ -25,7 +25,7 @@ public class UI_CountDown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ui_Timer = FindObjectOfType<UI_Timer>();
+        //ui_Timer = FindObjectOfType<UI_Timer>();
         SetCountDownOn();
     }
 
@@ -71,7 +71,7 @@ public class UI_CountDown : MonoBehaviour
                 GameManager.Instance.FlipAllCard();
                 //GameManager.Instance.StartCoroutine("FlipAllCardRoutine");
             }
-            ui_Timer.SetTimerOn();
+            UI_Timer.instance.SetTimerOn();
             count = 0;
         }
     }
@@ -113,7 +113,7 @@ public class UI_CountDown : MonoBehaviour
                                     //GameManager.Instance.FlipAllCard();
                                     //GameManager.Instance.StartCoroutine("FlipAllCardRoutine");
                                 }
-                                ui_Timer.SetTimerOn();
+                                UI_Timer.instance.SetTimerOn();
                                 Time.timeScale = 1;
                                 currentTime = 0;
                                 count = 0;

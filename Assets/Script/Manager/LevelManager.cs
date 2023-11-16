@@ -8,8 +8,6 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
     [SerializeField]
-    private UI_Timer ui_Timer;
-    [SerializeField]
     private UI_CountDown ui_CountDown;
 
     public string leveltext;
@@ -18,6 +16,7 @@ public class LevelManager : MonoBehaviour
     public static int findCount; //찾은 개수
     public static int targetCount; // 목표 개수
     public static int targetCardCount_Card; // 찾아야 할 화투패 위 개수
+    public bool restart_Score_Check = false;
 
     [SerializeField]
     private GameObject gameFinishPopup;
@@ -48,21 +47,6 @@ public class LevelManager : MonoBehaviour
         Debug.Log("레벨 선택" + subLevel);
         Debug.Log("레벨 선택" + mainLevel);
 
-        //if (gameSelect.activeSelf)
-        //{
-        //    mainLevel = 1;
-        //    subLevel = 1;
-        //    Debug.Log("난이도 선택 화면!!");
-        //}
-        //else
-        //{
-        //    Debug.Log("난이도 선택 화면이 아님");
-        //}
-
-        //gamePlay.SetActive(true);
-        Debug.Log("sublevel:" + subLevel);
-        //subLevel = 4;
-
         if (mainLevel == 0 && subLevel == 0) 
         {
             //보드 카드 오브젝트 생성 수
@@ -72,8 +56,13 @@ public class LevelManager : MonoBehaviour
             Debug.Log("레벨 선택 메소드 sublevel" + subLevel);
             leveltext = "쉬움 - 1단계";
 
-            Debug.Log("sublevel 업" + subLevel);
-            //GameSelect_Obejct_Off();
+            if(restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
+                restart_Score_Check = false;
+            }
         }
         else if(mainLevel == 0 && subLevel == 1)
         {
@@ -81,6 +70,13 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 2단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if(mainLevel == 0 && subLevel == 2)
         {   
@@ -88,6 +84,13 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 3단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if(mainLevel == 0 && subLevel == 3) 
         {   
@@ -95,6 +98,13 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 4단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if(mainLevel == 0 && subLevel == 4)
         {
@@ -102,15 +112,19 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 5단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         SceneManager.LoadScene("01_PlayGame");
     }
 
     public void Level_Normal()
     {
-        //mainLevel = 1;
-        //subLevel = 1;
-
         if (mainLevel == 1 && subLevel == 0)
         {
             targetCount = 3;
@@ -119,6 +133,12 @@ public class LevelManager : MonoBehaviour
             leveltext = "보통 - 1단계";
 
             //GameSelect_Obejct_Off();
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 1 && subLevel == 1)
         {
@@ -126,6 +146,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 2단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 1 && subLevel == 2)
         {
@@ -133,6 +159,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 3단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 1 && subLevel == 3)
         {
@@ -140,6 +172,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 4단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 1 && subLevel == 4)
         {
@@ -147,15 +185,18 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 5단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         SceneManager.LoadScene("01_PlayGame");
     }
 
     public void Level_Hard()
     {
-        //mainLevel = 1;
-        //subLevel = 1;
-
         if (mainLevel == 3 && subLevel == 1)
         {
             targetCount = 3;
@@ -164,6 +205,12 @@ public class LevelManager : MonoBehaviour
             //GameSelect_Obejct_Off();
 
             leveltext = "어려움 - 1단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 3 && subLevel == 2)
         {
@@ -171,6 +218,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 2단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 3 && subLevel == 3)
         {
@@ -178,6 +231,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 3단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 3 && subLevel == 4)
         {
@@ -185,6 +244,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 4단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         else if (mainLevel == 3 && subLevel == 5)
         {
@@ -192,6 +257,12 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 5단계";
+
+            if (restart_Score_Check)
+            {
+                ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                restart_Score_Check = false;
+            }
         }
         SceneManager.LoadScene("01_PlayGame");
     }
@@ -199,7 +270,7 @@ public class LevelManager : MonoBehaviour
     //게임 플레이 중 완료와 도중 종료를 체크
     public void GamePlayingCheck()
     {
-        Debug.Log("라운드 점수 체크 중 목표 카드:" + targetCount);
+        //Debug.Log("라운드 점수 체크 중 목표 카드:" + targetCount);
         Debug.Log("라운드 점수 체크 중 찾은 카드:" + findCount);
         if (findCount == targetCount)
         {
@@ -219,7 +290,7 @@ public class LevelManager : MonoBehaviour
             EffectManager.Instance.ui_confettiEffect_R.Show();
 
             //타이머 종료
-            ui_Timer.SetTimerOff();
+            UI_Timer.instance.SetTimerOff();
 
         }
     }
@@ -229,11 +300,8 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log("재시작");
 
+        restart_Score_Check = true;
         findCount = 0;
-
-        //ui_Timer.Init();
-        //gameFinishPopup.SetActive(false);
-        //GameManager.Instance.isFlipping = false;
 
         if (mainLevel == 0)
         {
@@ -247,20 +315,18 @@ public class LevelManager : MonoBehaviour
         {
             Level_Hard();
         }
-
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
     public void NextLevel()
     {
         Debug.Log("다음 레벨");
-        Debug.Log("다음 레벨 sublevel 체크" + subLevel);
+        //Debug.Log("다음 레벨 sublevel 체크" + subLevel);
 
         //ui_Timer.Init();
         findCount = 0;
         subLevel += 1;
-        Debug.Log("다음 레벨 sublevel 체크" + subLevel);
+        //Debug.Log("다음 레벨 sublevel 체크" + subLevel);
 
         //Board.instance.Restart();
         //gameFinishPopup.SetActive(false);

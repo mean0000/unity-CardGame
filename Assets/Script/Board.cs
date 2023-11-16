@@ -9,7 +9,6 @@ public class Board : MonoBehaviour
     public static Board instance;
     //private CardSelectEffect cardSelectEffect;
     private UI_CountDown ui_CountDown;
-    private UI_Timer ui_Timer;
 
     [SerializeField]
     private GameObject cardPrefab;
@@ -63,9 +62,6 @@ public class Board : MonoBehaviour
     {
         //cardSelectEffect = FindObjectOfType<CardSelectEffect>();
         ui_CountDown = FindObjectOfType<UI_CountDown>();
-
-        Debug.Log("확인");
-
         ui_CountDown.SetCountDownOn();
 
         GenerateCardID();
@@ -80,7 +76,7 @@ public class Board : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Start_아직 게임 시작 화면이 아님");
+            //Debug.Log("Start_아직 게임 시작 화면이 아님");
         };
     }
 
@@ -146,10 +142,8 @@ public class Board : MonoBehaviour
 
         if (resetCheck)
         {
-            Debug.Log("오류가 여기서" + CardObjectList.Count);
             for (int i = 0; i < 48; i++)
             {
-                Debug.Log("i의 값: " + i);
                 //CardObjectList.RemoveAt(i);
                 Destroy(CardObjectList[i]);
             }
@@ -194,7 +188,7 @@ public class Board : MonoBehaviour
     //보드 초기화 후 찾아야할 카드 생성
     void InitFindBoard()
     {
-        Debug.Log("오류 확인" + LevelManager.targetCardCount_Card);
+        //Debug.Log("오류 확인" + LevelManager.targetCardCount_Card);
         int findcardCount = LevelManager.targetCardCount_Card;
         Debug.Log("찾아야할 카드 개수: " + findcardCount);
         int findCardIndex = 0;
@@ -215,7 +209,7 @@ public class Board : MonoBehaviour
         }
 
 
-        Debug.Log("오류 확인 리스트 체크" + findCardObjectList.Count);
+        //Debug.Log("오류 확인 리스트 체크" + findCardObjectList.Count);
         if(resetCheck == false)
         {
             findCardObjectList[0].SetActive(true);
@@ -262,8 +256,8 @@ public class Board : MonoBehaviour
         int popupDivNum = 0;
         int randomIndex = UnityEngine.Random.Range(0, 2);
         Vector3 originalScale = transform.localScale;
-        Debug.Log("Random00: " + randomIndex);
-        Debug.Log("check" + check);
+        //Debug.Log("Random00: " + randomIndex);
+        //Debug.Log("check" + check);
         if (check)
         {
             if (randomIndex == 0)
