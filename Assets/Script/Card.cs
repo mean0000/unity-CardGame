@@ -23,6 +23,8 @@ public class Card : MonoBehaviour
     private bool startFlipCheck = false;
     //카드 매치 확인
     private bool isMatched = false;
+    //카운트 다운 확인
+    public static bool isCount = false;
 
     public int cardID;
     //public int findCardID;
@@ -144,10 +146,10 @@ public class Card : MonoBehaviour
     //카드 클릭
     private void OnMouseDown()
     {
-        if (!isFlipping  && !isMatched)
+        if (!isFlipping  && !isMatched && !isCount)
         {
             //FlipCard();
-            //Debug.Log("카드 뒤집는다");
+            Debug.Log("카드 뒤집는다");
             GameManager.Instance.CardClicked(this);
         }
     }

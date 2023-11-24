@@ -18,6 +18,6 @@ public class EffectManager : MonoBehaviour
     public CardSelectEffect cardSelectEffect;
     public UI_ConfettiEffect ui_confettiEffect_R;
     public UI_ConfettiEffect ui_confettiEffect_L;
-    public PopupEffect popupEffect;
-    public FlowEffect flowEffect;
+    //public PopupEffect popupEffect;
+    //public FlowEffect flowEffect;
 }

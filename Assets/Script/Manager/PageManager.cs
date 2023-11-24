@@ -52,14 +52,11 @@ public class PageManager : MonoBehaviour
                 camera.SetActive(true);
                 break;
             case 2:
-                BlackBack2.DOFade(2, fadeDuration).OnComplete(() =>
-                {
-                    camera.SetActive(false);
-                    gameSelect.SetActive(true);
-                });
+                camera.SetActive(false);
+                gameSelect.SetActive(true);
                 break;
             case 3:
-                gameEffect.SetActive(false);
+                Debug.Log("쉬움 난이도 시작");
                 BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
                 {
                     LevelManager.Instance.Level_Easy();
@@ -67,7 +64,7 @@ public class PageManager : MonoBehaviour
                 });
                 break;
             case 4:
-                gameEffect.SetActive(false);
+                Debug.Log("보통 난이도 시작");
                 BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
                 {
                     LevelManager.Instance.Level_Normal();
@@ -75,7 +72,7 @@ public class PageManager : MonoBehaviour
                 });
                 break;
             case 5:
-                gameEffect.SetActive(false);
+                Debug.Log("어려움 난이도 시작");
                 BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
                 {
                     LevelManager.Instance.Level_Hard();
@@ -84,11 +81,20 @@ public class PageManager : MonoBehaviour
                 break;
 
             case 6:
-                //gameEffect.SetActive(false);
                 BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
                 {
                     gamePlay.SetActive(false);
                     gameResult.SetActive(true);
+                });
+                break;
+            //그래프 화면에서 레벨 선택
+            case 7:
+                BlackBack.DOFade(1, fadeDuration).OnComplete(() =>
+                {
+                    LevelManager.findCount = 0;
+                    LevelManager.subLevel = 0;
+                    gameResult.SetActive(false);
+                    gameSelect.SetActive(true);
                 });
                 break;
         }

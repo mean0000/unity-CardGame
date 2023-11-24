@@ -9,10 +9,10 @@ public class BarChart_Easy : MonoBehaviour
 {
     public Bar barPrefab;
     public int[] inputValues = new int[14];
+    //List<Bar> bars = new List<Bar>();
     //public string[] lables = new string[14];
     public Color[] colors = new Color[2];
 
-    List<Bar> bars = new List<Bar>();
     float chartHeight;
 
     // Start is called before the first frame update
@@ -20,7 +20,10 @@ public class BarChart_Easy : MonoBehaviour
     {
         chartHeight = Screen.height + GetComponent<RectTransform>().sizeDelta.y;
 
-        DisplayGraph_Forcus(inputValues);
+        if (LevelManager.final_Level_Check_Easy)
+        {
+            DisplayGraph_Forcus(inputValues);
+        }
         
     }
 
@@ -31,14 +34,14 @@ public class BarChart_Easy : MonoBehaviour
         //최대 값
         int MaxValue = 100;
         //집중력
-        vals[0] = 20;
-        vals[1] = 40;
+        vals[0] = 60;
+        vals[1] = 70;
         //기억력
-        vals[6] = 50;
+        vals[6] = 80;
         vals[7] = 90;
         //순발력
-        vals[12] = 60;
-        vals[13] = 20;
+        vals[12] = 80;
+        vals[13] = 85;
 
         for (int i = 0; i < vals.Length; i++)
         {
@@ -46,7 +49,7 @@ public class BarChart_Easy : MonoBehaviour
             newBar.transform.SetParent(transform);
             //바 크기 조절
             RectTransform rt = newBar.bar.GetComponent<RectTransform>();
-            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.8f;
+            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.35f;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, chartHeight * normalizedValue);
             newBar.bar.color = colors[i % colors.Length];
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_LevelText : MonoBehaviour
+public class UI_LevelText_Popup : MonoBehaviour
 {
     //private LevelManager levelManager;
 
@@ -14,12 +14,12 @@ public class UI_LevelText : MonoBehaviour
     {
         //levelManager = FindObjectOfType<LevelManager>();
 
-        levelText.text = LevelManager.leveltext;
+        levelText.text = LevelManager.leveltext_popup;
     }
 
     // Update is called once per frame
     void Update()
     {
-        levelText.text = LevelManager.leveltext;
+        levelText.text = LevelManager.leveltext_popup;
     }
 }

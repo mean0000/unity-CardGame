@@ -10,16 +10,22 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     private UI_CountDown ui_CountDown;
 
-    public string leveltext;
+    public static string leveltext;
+    public static string leveltext_popup;
     public static int mainLevel; //게임 메인 레벨(쉬움, 보통, 어려움)
     public static int subLevel; //게임 서브 레벨 (쉬움 1단계, 쉬움 2단계, ... 총 5단계까지 )
     public static int findCount; //찾은 개수
     public static int targetCount; // 목표 개수
     public static int targetCardCount_Card; // 찾아야 할 화투패 위 개수
     public bool restart_Score_Check = false;
+    public static bool final_Level_Check_Easy = false;
+    public static bool final_Level_Check_Normal = false;
+    public static bool final_Level_Check_Hard = false;
 
     [SerializeField]
     private GameObject gameFinishPopup;
+    [SerializeField]
+    private GameObject gameResultPopup;
     [SerializeField]
     private GameObject gameSelect;
     [SerializeField]
@@ -41,6 +47,7 @@ public class LevelManager : MonoBehaviour
 
     public void Level_Easy()
     {
+        //subLevel = 4;
         // 처음 단계 시작시 mainLevel = 1, subLevel = 1 로 시작
         //그 이후 단계 선택 없이 sublevel에 +1 하여 진행
         //subLevel = 5가 되었을 때, 해당 단계는 마무리
@@ -55,6 +62,7 @@ public class LevelManager : MonoBehaviour
 
             Debug.Log("레벨 선택 메소드 sublevel" + subLevel);
             leveltext = "쉬움 - 1단계";
+            leveltext_popup = "쉬움 - 1단계 난이도를 완료 하셨습니다";
 
             if(restart_Score_Check)
             {
@@ -70,6 +78,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 2단계";
+            leveltext_popup = "쉬움 - 2단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -84,6 +93,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 3단계";
+            leveltext_popup = "쉬움 - 3단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -98,6 +108,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "쉬움 - 4단계";
+            leveltext_popup = "쉬움 - 4단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -110,8 +121,10 @@ public class LevelManager : MonoBehaviour
         {
             targetCount = 11;
             targetCardCount_Card = targetCount;
+            final_Level_Check_Easy = true;
 
             leveltext = "쉬움 - 5단계";
+            leveltext_popup = "쉬움 - 5단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -125,12 +138,14 @@ public class LevelManager : MonoBehaviour
 
     public void Level_Normal()
     {
+        mainLevel = 1;
         if (mainLevel == 1 && subLevel == 0)
         {
             targetCount = 3;
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 1단계";
+            leveltext_popup = "보통 - 1단계 난이도를 완료 하셨습니다";
 
             //GameSelect_Obejct_Off();
 
@@ -146,6 +161,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 2단계";
+            leveltext_popup = "보통 - 2단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -159,6 +175,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 3단계";
+            leveltext_popup = "보통 - 3단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -172,6 +189,7 @@ public class LevelManager : MonoBehaviour
             targetCardCount_Card = targetCount;
 
             leveltext = "보통 - 4단계";
+            leveltext_popup = "보통 - 4단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -183,8 +201,10 @@ public class LevelManager : MonoBehaviour
         {
             targetCount = 11;
             targetCardCount_Card = targetCount;
+            final_Level_Check_Normal = true;
 
             leveltext = "보통 - 5단계";
+            leveltext_popup = "보통 - 5단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -197,7 +217,8 @@ public class LevelManager : MonoBehaviour
 
     public void Level_Hard()
     {
-        if (mainLevel == 3 && subLevel == 1)
+        mainLevel = 2;
+        if (mainLevel == 2 && subLevel == 0)
         {
             targetCount = 3;
             targetCardCount_Card = targetCount;
@@ -205,6 +226,7 @@ public class LevelManager : MonoBehaviour
             //GameSelect_Obejct_Off();
 
             leveltext = "어려움 - 1단계";
+            leveltext_popup = "어려움 - 1단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -212,12 +234,13 @@ public class LevelManager : MonoBehaviour
                 restart_Score_Check = false;
             }
         }
-        else if (mainLevel == 3 && subLevel == 2)
+        else if (mainLevel == 2 && subLevel == 1)
         {
             targetCount = 5;
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 2단계";
+            leveltext_popup = "어려움 - 2단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -225,12 +248,13 @@ public class LevelManager : MonoBehaviour
                 restart_Score_Check = false;
             }
         }
-        else if (mainLevel == 3 && subLevel == 3)
+        else if (mainLevel == 2 && subLevel == 2)
         {
             targetCount = 7;
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 3단계";
+            leveltext_popup = "어려움 - 3단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -238,12 +262,13 @@ public class LevelManager : MonoBehaviour
                 restart_Score_Check = false;
             }
         }
-        else if (mainLevel == 3 && subLevel == 4)
+        else if (mainLevel == 2 && subLevel == 3)
         {
             targetCount = 9;
             targetCardCount_Card = targetCount;
 
             leveltext = "어려움 - 4단계";
+            leveltext_popup = "어려움 - 4단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -251,12 +276,14 @@ public class LevelManager : MonoBehaviour
                 restart_Score_Check = false;
             }
         }
-        else if (mainLevel == 3 && subLevel == 5)
+        else if (mainLevel == 2 && subLevel == 4)
         {
             targetCount = 11;
             targetCardCount_Card = targetCount;
+            final_Level_Check_Hard = true;
 
             leveltext = "어려움 - 5단계";
+            leveltext_popup = "어려움 - 5단계 난이도를 완료 하셨습니다";
 
             if (restart_Score_Check)
             {
@@ -281,13 +308,19 @@ public class LevelManager : MonoBehaviour
             //이펙트
             if(subLevel <= 3)
             {
-                EffectManager.Instance.popupEffect.PanelFadeIn();
+                //EffectManager.Instance.popupEffect.PanelFadeIn();
+                gameFinishPopup.SetActive(true);
             }else if(subLevel == 4)
             {
-                EffectManager.Instance.popupEffect.PanelFadeIn_Rusult();
+                gameResultPopup.SetActive(true);
+                //EffectManager.Instance.popupEffect.PanelFadeIn_Rusult();
             }
-            EffectManager.Instance.ui_confettiEffect_L.Show();
-            EffectManager.Instance.ui_confettiEffect_R.Show();
+
+            //EffectManager.Instance.ui_confettiEffect_L.Show();
+            //EffectManager.Instance.ui_confettiEffect_R.Show();
+
+            EffectManager.Instance.ui_confettiEffect_L.Invoke("Show", 0.4f);
+            EffectManager.Instance.ui_confettiEffect_R.Invoke("Show", 0.4f);
 
             //타이머 종료
             UI_Timer.instance.SetTimerOff();

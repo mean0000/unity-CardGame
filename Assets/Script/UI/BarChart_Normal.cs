@@ -9,19 +9,25 @@ public class BarChart_Normal : MonoBehaviour
 {
     public Bar barPrefab;
     public int[] inputValues = new int[14];
+    //List<Bar> bars = new List<Bar>();
     //public string[] lables = new string[14];
     public Color[] colors = new Color[2];
 
-    List<Bar> bars = new List<Bar>();
     float chartHeight;
+
+    [SerializeField]
+    private GameObject logo;
 
     // Start is called before the first frame update
     void Start()
     {
         chartHeight = Screen.height + GetComponent<RectTransform>().sizeDelta.y;
 
-        DisplayGraph_Forcus(inputValues);
-
+        if (LevelManager.final_Level_Check_Normal)
+        {
+            logo.SetActive(false);
+            DisplayGraph_Forcus(inputValues);
+        }
     }
 
     void DisplayGraph_Forcus(int[] vals)
@@ -30,21 +36,21 @@ public class BarChart_Normal : MonoBehaviour
         //최대 값
         int MaxValue = 100;
         //집중력
-        vals[0] = 20;
+        vals[0] = 50;
         vals[1] = 40;
         //기억력
-        vals[6] = 50;
-        vals[7] = 90;
+        vals[6] = 55;
+        vals[7] = 60;
         //순발력
-        vals[12] = 60;
-        vals[13] = 20;
+        vals[12] = 70;
+        vals[13] = 60;
         for (int i = 0; i < vals.Length; i++)
         {
             Bar newBar = Instantiate(barPrefab) as Bar;
             newBar.transform.SetParent(transform);
             //바 크기 조절
             RectTransform rt = newBar.bar.GetComponent<RectTransform>();
-            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.8f;
+            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.35f;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, chartHeight * normalizedValue);
             newBar.bar.color = colors[i % colors.Length];
 

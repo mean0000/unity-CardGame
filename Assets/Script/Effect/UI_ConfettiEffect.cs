@@ -21,10 +21,10 @@ public class UI_ConfettiEffect : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space)) Show(); // Test
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space)) Show(); // Test
+    //}
 
     public void Show()
     {

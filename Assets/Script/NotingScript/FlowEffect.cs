@@ -18,7 +18,7 @@ public class FlowEffect: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CloudMove();
+        //CloudMove();
         //StartCoroutine("BoomEffect");
     }
 
@@ -47,16 +47,16 @@ public class FlowEffect: MonoBehaviour
     }
 
 
-    //지나가는 구름
-    public void CloudMove()
-    {
-        //x값으로 200 거리를 2.5초 동안 이동
-        cloud_1.transform.DOLocalMoveX(1920, 430f).SetEase(Ease.OutBack);
-        cloud_2.transform.DOLocalMoveX(-1920, 440f).SetEase(Ease.OutBack);
-        cloud_3.transform.DOLocalMoveX(-1920, 420f).SetEase(Ease.OutBack);
-        cloud_4.transform.DOLocalMoveX(1920, 450f).SetEase(Ease.OutBack);
-        cloud_5.transform.DOLocalMoveX(-1920, 480f).SetEase(Ease.OutBack);
-    }
+    ////지나가는 구름
+    //public void CloudMove()
+    //{
+    //    //x값으로 200 거리를 2.5초 동안 이동
+    //    cloud_1.transform.DOLocalMoveX(1920, 430f).SetEase(Ease.OutBack);
+    //    cloud_2.transform.DOLocalMoveX(-1920, 440f).SetEase(Ease.OutBack);
+    //    cloud_3.transform.DOLocalMoveX(-1920, 420f).SetEase(Ease.OutBack);
+    //    cloud_4.transform.DOLocalMoveX(1920, 450f).SetEase(Ease.OutBack);
+    //    cloud_5.transform.DOLocalMoveX(-1920, 480f).SetEase(Ease.OutBack);
+    //}
 
 
 }

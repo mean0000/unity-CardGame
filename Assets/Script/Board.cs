@@ -119,8 +119,14 @@ public class Board : MonoBehaviour
         {
             int randomIndex = UnityEngine.Random.Range(i, findCardCount);
             int temp = findCardIDList[randomIndex];
+            Debug.Log("파인드 카드" + findCardIDList[0]);
             findCardIDList[randomIndex] = findCardIDList[i];
             findCardIDList[i] = temp;
+
+            if(LevelManager.mainLevel == 0)
+            {
+
+            }
         }
     }
 
@@ -199,9 +205,12 @@ public class Board : MonoBehaviour
             FindCardObject = Instantiate(findCardPrefab, pos, Quaternion.identity);
             FindCard findCard = FindCardObject.GetComponent<FindCard>();
 
+
             int findCardID = findCardIDList[findCardIndex++];
+            Debug.Log("찾아야할 " + findCardIDList[0]);
             findCardObjectList.Add(FindCardObject);
             findCardObjectList[index++].SetActive(false);
+
 
             findCard.SetFindCardID(findCardID);
             findCard.SetFrontSprite(cardSprite[findCardID]);
@@ -266,7 +275,7 @@ public class Board : MonoBehaviour
 
                 //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Success00.SetActive(true);
-                EffectManager.Instance.flowEffect.BoomEvent();
+                //EffectManager.Instance.flowEffect.BoomEvent();
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
                     card_Matching_Success00.SetActive(false);
@@ -278,7 +287,7 @@ public class Board : MonoBehaviour
 
                 //cardSelectEffect.CardClicking(popupDivNum);
                 card_Matching_Success01.SetActive(true);
-                EffectManager.Instance.flowEffect.BoomEvent();
+                //EffectManager.Instance.flowEffect.BoomEvent();
                 //팝업제거
                 transform.DOScale(originalScale, 1f).OnComplete(() =>
                 {
