@@ -153,7 +153,6 @@ public class Board : MonoBehaviour
                 //CardObjectList.RemoveAt(i);
                 Destroy(CardObjectList[i]);
             }
-
             for (int i = CardObjectList.Count - 1; i >= 0; i--)
             {
                 CardObjectList.Remove(CardObjectList[i]);
@@ -182,7 +181,6 @@ public class Board : MonoBehaviour
                 card.SetFrontSprite(cardSprite[cardID]);
                 cardList.Add(card);
 
-
                 if (cardIndex >= 48)
                 {
                     return;
@@ -205,12 +203,10 @@ public class Board : MonoBehaviour
             FindCardObject = Instantiate(findCardPrefab, pos, Quaternion.identity);
             FindCard findCard = FindCardObject.GetComponent<FindCard>();
 
-
             int findCardID = findCardIDList[findCardIndex++];
             Debug.Log("찾아야할 " + findCardIDList[0]);
             findCardObjectList.Add(FindCardObject);
             findCardObjectList[index++].SetActive(false);
-
 
             findCard.SetFindCardID(findCardID);
             findCard.SetFrontSprite(cardSprite[findCardID]);
