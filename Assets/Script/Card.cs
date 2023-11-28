@@ -31,7 +31,6 @@ public class Card : MonoBehaviour
 
 
 
-
     public void SetCardID(int id)
     { 
         cardID = id;

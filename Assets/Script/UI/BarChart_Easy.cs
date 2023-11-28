@@ -32,16 +32,16 @@ public class BarChart_Easy : MonoBehaviour
         //int MaxValue = vals.Max();
 
         //최대 값
-        int MaxValue = 100;
+        int MaxValue = 1000;
         //집중력
-        vals[0] = 60;
-        vals[1] = 70;
+        vals[0] = 240;
+        vals[1] = ScoreManager.all_Forcus_Score_Easy * 2;
         //기억력
-        vals[6] = 80;
-        vals[7] = 90;
+        vals[6] = 450;
+        vals[7] = ScoreManager.all_Memory_Score_Easy * 10;
         //순발력
-        vals[12] = 80;
-        vals[13] = 85;
+        vals[12] = 700;
+        vals[13] = ScoreManager.all_Time_Score_Easy;
 
         for (int i = 0; i < vals.Length; i++)
         {

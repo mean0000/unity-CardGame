@@ -84,6 +84,7 @@ public class LevelManager : MonoBehaviour
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
                 ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -99,6 +100,7 @@ public class LevelManager : MonoBehaviour
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
                 ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -114,6 +116,7 @@ public class LevelManager : MonoBehaviour
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
                 ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -130,6 +133,7 @@ public class LevelManager : MonoBehaviour
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
                 ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -152,6 +156,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -166,6 +172,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -180,6 +188,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -194,6 +204,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -209,6 +221,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -231,6 +245,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -245,6 +261,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -259,6 +277,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -273,6 +293,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }
@@ -288,6 +310,8 @@ public class LevelManager : MonoBehaviour
             if (restart_Score_Check)
             {
                 ScoreManager.instance.Restrat_Time_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Forcus_Score((int)UI_Timer.instance.second);
+                ScoreManager.instance.Restart_Memory_Score();
                 restart_Score_Check = false;
             }
         }

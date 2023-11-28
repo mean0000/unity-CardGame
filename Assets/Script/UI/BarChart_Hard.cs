@@ -34,16 +34,16 @@ public class BarChart_Hard : MonoBehaviour
     {
         //int MaxValue = vals.Max();
         //최대 값
-        int MaxValue = 100;
+        int MaxValue = 1000;
         //집중력
-        vals[0] = 20;
-        vals[1] = 30;
+        vals[0] = 660;
+        vals[1] = ScoreManager.all_Forcus_Score_Hard * 2;
         //기억력
-        vals[6] = 35;
-        vals[7] = 55;
+        vals[6] = 500;
+        vals[7] = ScoreManager.all_Memory_Score_Hard * 10;
         //순발력
-        vals[12] = 40;
-        vals[13] = 25;
+        vals[12] = 870;
+        vals[13] = ScoreManager.all_Time_Score_Hard;
         for (int i = 0; i < vals.Length; i++)
         {
             Bar newBar = Instantiate(barPrefab) as Bar;

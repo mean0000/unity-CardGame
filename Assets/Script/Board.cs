@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Board : MonoBehaviour
@@ -40,6 +41,8 @@ public class Board : MonoBehaviour
     private List<GameObject> CardObjectList = new List<GameObject>();
 
     private List<int> findCardIDList = new List<int>();
+    private List<int> findCardIDList_Hard = new List<int>();
+    private List<int> findCardIDList_ALL = new List<int>();
     private List<GameObject> findCardObjectList = new List<GameObject>();
 
     private int index = 0;
@@ -97,6 +100,30 @@ public class Board : MonoBehaviour
         {
             findCardIDList.Add(i);
         }
+
+
+        try
+        {
+            //if (LevelManager.mainLevel == 0)
+            //{
+                for (int j = 6; j < 46; j += 2)
+                {
+                    findCardIDList.RemoveAt(j); // List[5] = 6
+                    int temp1 = findCardIDList[j];
+                    findCardIDList_Hard.Add(temp1-1);
+                    //Debug.Log("찾아라 파인드 카드 + @@" + findCardIDList[j]);
+                    findCardIDList.RemoveAt(j);
+                    int temp2 = findCardIDList[j];
+                    findCardIDList_Hard.Add(temp2-1);
+                    //Debug.Log("찾아라 파인드 카드 + $$$" + findCardIDList[j]);
+                }
+            //}
+        }
+        catch (ArgumentOutOfRangeException e)
+        {
+            Debug.Log(e);
+        }
+        
     }
 
     //카드 섞기
@@ -114,20 +141,117 @@ public class Board : MonoBehaviour
 
     void ShuffleFindCardID()
     {
+        int findHardCard = 0;
+        int findCard_val = 0;
         int findCardCount = findCardIDList.Count;
-        for (int i = 0; i < findCardCount; i++)
+        int findCardHardCount = findCardIDList_Hard.Count;
+
+
+        if (LevelManager.mainLevel == 0 && LevelManager.subLevel == 0)
         {
-            int randomIndex = UnityEngine.Random.Range(i, findCardCount);
-            int temp = findCardIDList[randomIndex];
-            Debug.Log("파인드 카드" + findCardIDList[0]);
-            findCardIDList[randomIndex] = findCardIDList[i];
-            findCardIDList[i] = temp;
-
-            if(LevelManager.mainLevel == 0)
-            {
-
-            }
+            findCard_val = 3;
         }
+        else if (LevelManager.mainLevel == 0 && LevelManager.subLevel == 1)
+        {
+            findCard_val = 5;
+        }
+        else if (LevelManager.mainLevel == 0 && LevelManager.subLevel == 2)
+        {
+            findCard_val = 7;
+        }
+        else if (LevelManager.mainLevel == 0 && LevelManager.subLevel == 3)
+        {
+            findCard_val = 9;
+        }
+        else if (LevelManager.mainLevel == 0 && LevelManager.subLevel == 4)
+        {
+            findCard_val = 11;
+        }
+ 
+        if (LevelManager.mainLevel == 1 && LevelManager.subLevel == 0)
+        {
+            findCard_val = 2;
+            findHardCard = 1;
+        }
+        else if(LevelManager.mainLevel == 1 && LevelManager.subLevel == 1)
+        {
+            findCard_val = 4;
+            findHardCard = 1;
+        }
+        else if (LevelManager.mainLevel == 1 && LevelManager.subLevel == 2)
+        {
+            findCard_val = 6;
+            findHardCard = 1;
+        }
+        else if (LevelManager.mainLevel == 1 && LevelManager.subLevel == 3)
+        {
+            findCard_val = 7;
+            findHardCard = 2;
+        }
+        else if (LevelManager.mainLevel == 1 && LevelManager.subLevel == 4)
+        {
+            findCard_val = 9;
+            findHardCard = 2;
+        }
+
+        if (LevelManager.mainLevel == 2 && LevelManager.subLevel == 0)
+        {
+            findCard_val = 1;
+            findHardCard = 2;
+        }
+        else if (LevelManager.mainLevel == 2 && LevelManager.subLevel == 1)
+        {
+            findCard_val = 3;
+            findHardCard = 2;
+        }
+        else if (LevelManager.mainLevel == 2 && LevelManager.subLevel == 2)
+        {
+            findCard_val = 5;
+            findHardCard = 2;
+        }
+        else if (LevelManager.mainLevel == 2 && LevelManager.subLevel == 3)
+        {
+            findCard_val = 6;
+            findHardCard = 3;
+        }
+        else if (LevelManager.mainLevel == 2 && LevelManager.subLevel == 4)
+        {
+            findCard_val = 8;
+            findHardCard = 3;
+        }
+
+
+        for (int i = 0; i < findCard_val; i++)
+        {
+            //int randomIndex = UnityEngine.Random.Range(i, findCardCount);
+            int randomIndex = 0;
+            while (findCardIDList.Contains(randomIndex))
+            {
+                randomIndex = UnityEngine.Random.Range(i, findCardCount);
+            }
+
+            int temp = findCardIDList[randomIndex];
+            findCardIDList[randomIndex] = findCardIDList[i];
+            //findCardIDList_ALL[i] = temp;
+            findCardIDList_ALL.Add(temp);
+        }
+
+        for(int j = 0; j < findHardCard; j++)
+        {
+            int randomIndex_Hard = UnityEngine.Random.Range(j, findCardHardCount);
+
+            while (findCardIDList_Hard.Contains(randomIndex_Hard))
+            {
+                randomIndex_Hard = UnityEngine.Random.Range(j, findCardHardCount);
+            }
+            int temp = findCardIDList_Hard[randomIndex_Hard];
+            findCardIDList_Hard[randomIndex_Hard] = findCardIDList_Hard[j];
+
+            findCardIDList_ALL.Add(temp);
+        }
+
+        System.Random random = new System.Random();
+        findCardIDList_ALL = findCardIDList_ALL.OrderBy(a => random.Next()).ToList();
     }
 
     //보드 초기화 후 카드 생성 (추후 중앙 정렬 필요)
@@ -203,8 +327,8 @@ public class Board : MonoBehaviour
             FindCardObject = Instantiate(findCardPrefab, pos, Quaternion.identity);
             FindCard findCard = FindCardObject.GetComponent<FindCard>();
 
-            int findCardID = findCardIDList[findCardIndex++];
-            Debug.Log("찾아야할 " + findCardIDList[0]);
+            int findCardID = findCardIDList_ALL[findCardIndex++];
+            Debug.Log("찾아야할 " + findCardIDList_ALL[0]);
             findCardObjectList.Add(FindCardObject);
             findCardObjectList[index++].SetActive(false);
 

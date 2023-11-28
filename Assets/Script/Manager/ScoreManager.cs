@@ -76,15 +76,16 @@ public class ScoreManager : MonoBehaviour
     int sub3_Memory_Normal = 0;
     int sub4_Memory_Normal = 0;
     int sub5_Memory_Normal = 0;
+    int final_Memory_Normal = 0;
 
     int sub1_Memory_Hard = 0;
     int sub2_Memory_Hard = 0;
     int sub3_Memory_Hard = 0;
     int sub4_Memory_Hard = 0;
     int sub5_Memory_Hard = 0;
+    int final_Memory_Hard = 0;
 
-
-
+    int temp_Memory = 0;
 
     void Awake()
     {
@@ -223,7 +224,7 @@ public class ScoreManager : MonoBehaviour
                 //Debug.Log("서브 점수_5::" + sub5_Score_Hard);
             }
             final_Score_Hard = sub1_Score_Hard + sub2_Score_Hard + sub3_Score_Hard + sub4_Score_Hard + sub5_Score_Hard;
-            //Debug.Log("중간 정산 점수:::" + final_Score_Hard);
+            Debug.Log("중간 정산 점수:::" + final_Score_Hard);
         }
 
         All_Time_Score();
@@ -331,7 +332,7 @@ public class ScoreManager : MonoBehaviour
         if (LevelManager.mainLevel == 0)
         {
             all_Time_Score_Easy += final_Score_Easy;
-            //Debug.Log("쉬움 최종 점수:::" + time_Score_Easy);
+            Debug.Log("쉬움 최종 점수:::" + all_Time_Score_Easy);
         }
         else if (LevelManager.mainLevel == 1)
         {
@@ -590,63 +591,204 @@ public class ScoreManager : MonoBehaviour
     public void Memory_Score_Save()
     {
         /// <----------------------------------------------   쉬움 난이도   ---------------------------------------------->///
+
         if (LevelManager.mainLevel == 0)
         {
             if (LevelManager.subLevel == 0)
             {
-                //sub1_Memory_Easy = 0;
+                sub1_Memory_Easy = 0;
                 sub1_Memory_Easy += 1;
+                temp_Memory++;
+                Debug.Log("sub1_Memory_Easy" + sub1_Memory_Easy);
             }
             if (LevelManager.subLevel == 1)
             {
-                //sub2_Memory_Easy = 0;
+                sub2_Memory_Easy = 0;
                 sub2_Memory_Easy += 1;
+                temp_Memory++;
                 //Debug.Log("서브 점수_2::" + sub2_Forcus_Easy);
             }
             if (LevelManager.subLevel == 2)
             {
-                //sub3_Memory_Easy = 0;
+                sub3_Memory_Easy = 0;
                 sub3_Memory_Easy += 1;
+                temp_Memory++;
                 //Debug.Log("서브 점수_3::" + sub3_Forcus_Easy);
             }
             if (LevelManager.subLevel == 3)
             {
-                //sub4_Memory_Easy = 0;
+                sub4_Memory_Easy = 0;
                 sub4_Memory_Easy += 1;
+                temp_Memory++;
                 //Debug.Log("서브 점수_4::" + sub4_Forcus_Easy);
             }
             if (LevelManager.subLevel == 4)
             {
-                //sub5_Memory_Easy = 0;
+                sub5_Memory_Easy = 0;
                 sub5_Memory_Easy += 1;
+                temp_Memory++;
                 //Debug.Log("서브 점수_5::" + sub5_Forcus_Easy);
             }
+            final_Memory_Easy = sub1_Memory_Easy + sub2_Memory_Easy + sub3_Memory_Easy + sub4_Memory_Easy + sub5_Memory_Easy;
         }
+
+
+        /// <----------------------------------------------   보통 난이도   ---------------------------------------------->///
+
+        if (LevelManager.mainLevel == 1)
+        {
+            if (LevelManager.subLevel == 0)
+            {
+                sub1_Memory_Normal = 0;
+                sub1_Memory_Normal += 1;
+            }
+            if (LevelManager.subLevel == 1)
+            {
+                sub2_Memory_Normal = 0;
+                sub2_Memory_Normal += 1;
+                //Debug.Log("서브 점수_2::" + sub2_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 2)
+            {
+                sub3_Memory_Normal = 0;
+                sub3_Memory_Normal += 1;
+                //Debug.Log("서브 점수_3::" + sub3_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 3)
+            {
+                sub4_Memory_Normal = 0;
+                sub4_Memory_Normal += 1;
+                //Debug.Log("서브 점수_4::" + sub4_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 4)
+            {
+                sub5_Memory_Normal = 0;
+                sub5_Memory_Normal += 1;
+                //Debug.Log("서브 점수_5::" + sub5_Forcus_Easy);
+            }
+            final_Memory_Normal = sub1_Memory_Normal + sub2_Memory_Normal + sub3_Memory_Normal + sub3_Memory_Normal + sub4_Memory_Normal;
+        }
+
+        /// <----------------------------------------------   어려움 난이도   ---------------------------------------------->///
+        if (LevelManager.mainLevel == 2)
+        {
+            if (LevelManager.subLevel == 0)
+            {
+                sub1_Memory_Hard = 0;
+                sub1_Memory_Hard += 1;
+            }
+            if (LevelManager.subLevel == 1)
+            {
+                sub2_Memory_Hard = 0;
+                sub2_Memory_Hard += 1;
+                //Debug.Log("서브 점수_2::" + sub2_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 2)
+            {
+                sub3_Memory_Hard = 0;
+                sub3_Memory_Hard += 1;
+                //Debug.Log("서브 점수_3::" + sub3_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 3)
+            {
+                sub4_Memory_Hard = 0;
+                sub4_Memory_Hard += 1;
+                //Debug.Log("서브 점수_4::" + sub4_Forcus_Easy);
+            }
+            if (LevelManager.subLevel == 4)
+            {
+                sub5_Memory_Hard = 0;
+                sub5_Memory_Hard += 1;
+                //Debug.Log("서브 점수_5::" + sub5_Forcus_Easy);
+            }
+            final_Memory_Hard = sub1_Memory_Hard + sub2_Memory_Hard + sub3_Memory_Hard + sub4_Memory_Hard + sub5_Memory_Hard;
+        }
+
+        All_Memory_Score();
     }
     public void Restart_Memory_Score()
     {
+        /// <----------------------------------------------   쉬움 난이도   ---------------------------------------------->///
         if (LevelManager.mainLevel == 0)
         {
             if (LevelManager.subLevel == 0)
             {
-                sub1_Memory_Easy -= 0;
-                Debug.Log("쉬움 재시작 점수:::" + sub1_Memory_Easy);
+                all_Memory_Score_Easy -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
             }
             if (LevelManager.subLevel == 1)
             {
-                sub2_Memory_Easy -= 0;
+                all_Memory_Score_Easy -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
             }
             if (LevelManager.subLevel == 2)
             {
-                sub3_Memory_Easy -= 0;
+                all_Memory_Score_Easy -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
             }
             if (LevelManager.subLevel == 3)
             {
-                sub4_Memory_Easy -= 0;
+                all_Memory_Score_Easy -= temp_Memory;
             }
             if (LevelManager.subLevel == 4)
             {
-                sub5_Memory_Easy -= 0;
+                all_Memory_Score_Easy -= temp_Memory;
+            }
+        }
+
+        /// <----------------------------------------------   보통 난이도   ---------------------------------------------->///
+        if (LevelManager.mainLevel == 1)
+        {
+            if (LevelManager.subLevel == 0)
+            {
+                all_Memory_Score_Normal -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 1)
+            {
+                all_Memory_Score_Normal -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 2)
+            {
+                all_Memory_Score_Normal -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 3)
+            {
+                all_Memory_Score_Normal -= temp_Memory;
+            }
+            if (LevelManager.subLevel == 4)
+            {
+                all_Memory_Score_Normal -= temp_Memory;
+            }
+        }
+
+        /// <----------------------------------------------   어려움 난이도   ---------------------------------------------->///
+        if (LevelManager.mainLevel == 2)
+        {
+            if (LevelManager.subLevel == 0)
+            {
+                all_Memory_Score_Hard -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 1)
+            {
+                all_Memory_Score_Hard -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 2)
+            {
+                all_Memory_Score_Hard -= temp_Memory;
+                Debug.Log("temp_Memory" + temp_Memory);
+            }
+            if (LevelManager.subLevel == 3)
+            {
+                all_Memory_Score_Hard -= temp_Memory;
+            }
+            if (LevelManager.subLevel == 4)
+            {
+                all_Memory_Score_Hard -= temp_Memory;
             }
         }
     }
@@ -655,19 +797,18 @@ public class ScoreManager : MonoBehaviour
     {
         if (LevelManager.mainLevel == 0)
         {
-            final_Memory_Easy = sub1_Memory_Easy + sub2_Memory_Easy + sub3_Memory_Easy + sub4_Memory_Easy + sub5_Memory_Easy;
             Debug.Log("중간 정산 점수:::" + final_Memory_Easy);
             all_Memory_Score_Easy += final_Memory_Easy;
             Debug.Log("쉬움_기억력 최종 점수:::" + all_Memory_Score_Easy);
         }
         else if (LevelManager.mainLevel == 1)
         {
-            all_Memory_Score_Normal += final_Forcus_Normal;
+            all_Memory_Score_Normal += final_Memory_Normal;
             //Debug.Log("보통 최종 점수:::" + time_Score_Normal);
         }
         else if (LevelManager.mainLevel == 2)
         {
-            all_Memory_Score_Hard += final_Forcus_Hard;
+            all_Memory_Score_Hard += final_Memory_Hard;
             //Debug.Log("어려움 최종 점수:::" + time_Score_Hard);
         }
     }
