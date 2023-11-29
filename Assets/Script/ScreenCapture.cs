@@ -8,6 +8,7 @@ public class ScreenCapture : MonoBehaviour
 {
     public Texture2D capturedImage; //캡처된 이미지 저장
     public Material saveCapture;
+    public static string userName;
 
     [SerializeField]
     private TextMeshProUGUI guide_Text;
@@ -57,6 +58,10 @@ public class ScreenCapture : MonoBehaviour
                 guide_Text.text = "1초간 정면을 바라봐 주세요.";
                 if (currentTime >=3 && CountDonw_Check)
                 {
+                    userName = "Luke";
+                    XmlManager.instance.CreateXml();
+                    //XmlManager.instance.SaveOverlapXml();
+
                     guide_Text.text = "";
                     guide_Img.SetActive(false);
                     currentTime = 0;

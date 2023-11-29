@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<UserInfo>
+  <User>
+    <Name>Luke</Name>
+    <Main_level>2</Main_level>
+    <Sub_level>0</Sub_level>
+    <Memory_score_easy>0</Memory_score_easy>
+    <Memory_score_normal>0</Memory_score_normal>
+    <Memory_score_hard>1</Memory_score_hard>
+    <Forcus_score_easy>0</Forcus_score_easy>
+    <Forcus_score_normal>0</Forcus_score_normal>
+    <Forcus_score_hard>4</Forcus_score_hard>
+    <Time_score_easy>0</Time_score_easy>
+    <Time_score_normal>0</Time_score_normal>
+    <Time_score_hard>6</Time_score_hard>
+    <Game_off_time />
+  </User>
+</UserInfo>

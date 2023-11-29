@@ -15,6 +15,9 @@ public class BarChart_Easy : MonoBehaviour
 
     float chartHeight;
 
+    [SerializeField]
+    private GameObject logo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,7 @@ public class BarChart_Easy : MonoBehaviour
 
         if (LevelManager.final_Level_Check_Easy)
         {
+            logo.SetActive(false);
             DisplayGraph_Forcus(inputValues);
         }
         
