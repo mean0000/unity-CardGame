@@ -24,6 +24,7 @@ public class ScreenCapture : MonoBehaviour
     private void Start()
     {
         CountDonw_Check = true;
+        XmlManager.instance.CreateXml();
     }
 
     public IEnumerator capture()
@@ -59,7 +60,7 @@ public class ScreenCapture : MonoBehaviour
                 if (currentTime >=3 && CountDonw_Check)
                 {
                     userName = "Luke";
-                    XmlManager.instance.CreateXml();
+                    
                     //XmlManager.instance.SaveOverlapXml();
 
                     guide_Text.text = "";

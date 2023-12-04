@@ -36,21 +36,21 @@ public class BarChart_Normal : MonoBehaviour
         //최대 값
         int MaxValue = 1000;
         //집중력
-        vals[0] = 440;
-        vals[1] = ScoreManager.all_Forcus_Score_Normal * 2;
+        vals[0] = 680;
+        vals[1] = 1000 - ScoreManager.all_Forcus_Score_Normal * 2;
         //기억력
-        vals[6] = 750;
-        vals[7] = ScoreManager.all_Memory_Score_Normal * 10;
+        vals[6] = 550;
+        vals[7] = 1000- ScoreManager.all_Memory_Score_Normal * 10;
         //순발력
         vals[12] = 660;
-        vals[13] = ScoreManager.all_Time_Score_Normal;
+        vals[13] = 1000 - ScoreManager.all_Time_Score_Normal;
         for (int i = 0; i < vals.Length; i++)
         {
             Bar newBar = Instantiate(barPrefab) as Bar;
             newBar.transform.SetParent(transform);
             //바 크기 조절
             RectTransform rt = newBar.bar.GetComponent<RectTransform>();
-            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.35f;
+            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.3f;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, chartHeight * normalizedValue);
             newBar.bar.color = colors[i % colors.Length];
 

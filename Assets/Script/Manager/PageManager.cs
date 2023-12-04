@@ -97,6 +97,10 @@ public class PageManager : MonoBehaviour
                     gameSelect.SetActive(true);
                 });
                 break;
+            case 8:
+                gameAgree.SetActive(false);
+                gameSelect.SetActive(true);
+                break;
         }
     }
 

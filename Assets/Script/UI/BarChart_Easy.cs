@@ -38,14 +38,14 @@ public class BarChart_Easy : MonoBehaviour
         //최대 값
         int MaxValue = 1000;
         //집중력
-        vals[0] = 240;
-        vals[1] = ScoreManager.all_Forcus_Score_Easy * 2;
+        vals[0] = 880;
+        vals[1] = 1000 - ScoreManager.all_Forcus_Score_Easy * 2;
         //기억력
-        vals[6] = 450;
-        vals[7] = ScoreManager.all_Memory_Score_Easy * 10;
+        vals[6] = 650;
+        vals[7] = 1000 - ScoreManager.all_Memory_Score_Easy * 10;
         //순발력
-        vals[12] = 700;
-        vals[13] = ScoreManager.all_Time_Score_Easy;
+        vals[12] = 745;
+        vals[13] = 1000 - ScoreManager.all_Time_Score_Easy;
 
         for (int i = 0; i < vals.Length; i++)
         {
@@ -53,7 +53,7 @@ public class BarChart_Easy : MonoBehaviour
             newBar.transform.SetParent(transform);
             //바 크기 조절
             RectTransform rt = newBar.bar.GetComponent<RectTransform>();
-            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.35f;
+            float normalizedValue = ((float)vals[i] / (float)MaxValue) * 0.3f;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, chartHeight * normalizedValue);
             newBar.bar.color = colors[i % colors.Length];
 

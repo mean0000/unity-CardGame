@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour
         // 처음 단계 시작시 mainLevel = 1, subLevel = 1 로 시작
         //그 이후 단계 선택 없이 sublevel에 +1 하여 진행
         //subLevel = 5가 되었을 때, 해당 단계는 마무리
+        mainLevel = 0;
         Debug.Log("레벨 선택" + subLevel);
         Debug.Log("레벨 선택" + mainLevel);
 
